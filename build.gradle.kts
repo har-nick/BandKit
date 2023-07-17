@@ -11,8 +11,10 @@ repositories {
     mavenCentral()
 }
 
+@Suppress("UnusedPrivateProperty")
 kotlin {
     jvm {
+        jvmToolchain(17)
         compilations.all {
             kotlinOptions.jvmTarget = "17"
         }
