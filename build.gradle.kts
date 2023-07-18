@@ -13,8 +13,12 @@ repositories {
 
 @Suppress("UnusedPrivateProperty")
 kotlin {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     jvm {
-        jvmToolchain(17)
         compilations.all {
             kotlinOptions.jvmTarget = "17"
         }
