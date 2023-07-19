@@ -1,11 +1,8 @@
 [versions]
-coroutines = "1.7.2"
 kotlin = "1.9.0"
 ktor = "2.3.2"
 
 [libraries]
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
-
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
 koin-core = { module = "io.insert-koin:koin-core", version = "3.4.2" }
 
@@ -22,7 +19,6 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 
 [bundles]
 common-main = [
-    "coroutines-core",
     "kotlinx-datetime",
     "koin-core",
     "ktor-content-negotiation",
