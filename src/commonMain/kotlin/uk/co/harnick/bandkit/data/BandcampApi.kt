@@ -1,10 +1,14 @@
 package uk.co.harnick.bandkit.data
 
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.koin.core.component.inject
@@ -33,10 +37,9 @@ object BandcampApi : BandKitKoinComponent() {
         }.body()
     }
 
-    suspend fun fetchItems(
-        token: String,
-        body: CollectionItemsRequestBody
-    ): CollectionItemsResponseDto {
+    suspend fun fetchItems(token: String, userId: Long, itemCount: Int): CollectionItemsResponseDto {
+        val serializedBody = Json.encodeToString(CollectionItemsRequestBody(userId, itemCount))
+
         return client.post(ITEMS) {
             contentType(ContentType.Application.Json)
             header(key = "Cookie", value = token)

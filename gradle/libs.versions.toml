@@ -4,6 +4,7 @@ ktor = "2.3.2"
 
 [libraries]
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
+
 koin-core = { module = "io.insert-koin:koin-core", version = "3.4.2" }
 
 ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -18,9 +19,4 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
-common-main = [
-    "kotlinx-datetime",
-    "koin-core",
-    "ktor-content-negotiation",
-    "ktor-serialization-json"
-]
+common-main = ["kotlinx-datetime", "koin-core", "ktor-content-negotiation", "ktor-serialization-json"]

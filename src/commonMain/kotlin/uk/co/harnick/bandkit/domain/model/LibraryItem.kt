@@ -1,9 +1,7 @@
 package uk.co.harnick.bandkit.domain.model
 
-import uk.co.harnick.bandkit.data.remote.items.CollectionItemsResponseDto
 import kotlinx.serialization.SerializationException
-import uk.co.harnick.bandkit.domain.model.Track
-import uk.co.harnick.bandkit.domain.model.toTrack
+import uk.co.harnick.bandkit.data.remote.items.CollectionItemsResponseDto
 
 data class LibraryItem(
     val id: Long,
