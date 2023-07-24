@@ -12,9 +12,9 @@ import io.ktor.http.contentType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.koin.core.component.inject
-import uk.co.harnick.bandkit.data.BandcampApi.Urls.BASE_URL
-import uk.co.harnick.bandkit.data.BandcampApi.Urls.ITEMS
-import uk.co.harnick.bandkit.data.BandcampApi.Urls.SUMMARY
+import uk.co.harnick.bandkit.data.BandcampApi.Sources.BASE_URL
+import uk.co.harnick.bandkit.data.BandcampApi.Sources.ITEMS
+import uk.co.harnick.bandkit.data.BandcampApi.Sources.SUMMARY
 import uk.co.harnick.bandkit.data.model.CollectionItemsRequestBody
 import uk.co.harnick.bandkit.data.remote.items.CollectionItemsResponseDto
 import uk.co.harnick.bandkit.data.remote.summary.CollectionSummaryResponseDto
@@ -24,7 +24,7 @@ import uk.co.harnick.bandkit.domain.model.BandcampUser
 object BandcampApi : BandKitKoinComponent() {
     private val client by inject<HttpClient>()
 
-    private object Urls {
+    object Sources {
         const val BASE_URL = "https://bandcamp.com"
         const val SUMMARY = "$BASE_URL/api/fan/2/collection_summary"
         const val ITEMS = "$BASE_URL/api/fancollection/1/collection_items"
@@ -37,13 +37,17 @@ object BandcampApi : BandKitKoinComponent() {
         }.body()
     }
 
-    suspend fun fetchItems(token: String, userId: Long, itemCount: Int): CollectionItemsResponseDto {
+    suspend fun fetchItems(
+        token: String,
+        userId: Long,
+        itemCount: Int
+    ): CollectionItemsResponseDto {
         val serializedBody = Json.encodeToString(CollectionItemsRequestBody(userId, itemCount))
 
         return client.post(ITEMS) {
             contentType(ContentType.Application.Json)
             header(key = "Cookie", value = token)
-            setBody(Json.encodeToString(body))
+            setBody(Json.encodeToString(serializedBody))
         }.body()
     }
 
@@ -73,6 +77,13 @@ object BandcampApi : BandKitKoinComponent() {
             .substringBefore("_")
             .toLongOrNull()
 
-        return BandcampUser(username, nickname = null, avatarId, bannerId, followerCount, followingCount)
+        return BandcampUser(
+            username,
+            nickname = null,
+            avatarId,
+            bannerId,
+            followerCount,
+            followingCount
+        )
     }
 }
