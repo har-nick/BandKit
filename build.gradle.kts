@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.dokka)
     id("maven-publish")
 }
 
@@ -44,7 +45,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.bundles.common.main)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.ktor.content.negotiation)
+                implementation(libs.ktor.core)
+                implementation(libs.ktor.logging)
+                implementation(libs.ktor.serialization.json)
             }
         }
         val commonTest by getting {
@@ -56,6 +62,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(libs.ktor.engine.cio)
+                implementation(libs.slf4j.simple)
             }
         }
         val jvmTest by getting
