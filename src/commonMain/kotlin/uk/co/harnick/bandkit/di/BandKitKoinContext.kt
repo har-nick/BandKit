@@ -3,7 +3,7 @@ package uk.co.harnick.bandkit.di
 import org.koin.dsl.koinApplication
 
 object BandKitKoinContext {
-    val koinApp = koinApplication {
+    private val koinApp = koinApplication {
         modules(sharedModule)
     }
 
