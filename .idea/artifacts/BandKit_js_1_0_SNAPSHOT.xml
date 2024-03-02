@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="BandKit-js-1.0-SNAPSHOT">
-    <output-path>/var/home/aharnick/Projects/BandKit/build/libs</output-path>
-    <root id="archive" name="BandKit-js-1.0-SNAPSHOT.jar">
-      <element id="module-output" name="uk.co.harnick.BandKit.jsMain" />
-    </root>
-  </artifact>
-</component>
