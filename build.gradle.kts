@@ -10,10 +10,14 @@ version = "1.0-SNAPSHOT"
 
 android {
     compileSdk = 34
-    namespace = "some.namespace.previously.in.android.manifest"
+    namespace = "uk.co.harnick"
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
         compileSdk = 34
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
+        targetCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
     }
 }
 
