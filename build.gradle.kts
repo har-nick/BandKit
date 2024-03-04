@@ -34,7 +34,7 @@ kotlin {
     jvm()
     androidTarget()
     iosArm64()
-    linuxArm64()
+    linuxX64()
     mingwX64("windows")
 
     sourceSets {
@@ -55,6 +55,19 @@ kotlin {
         }
         windowsMain.dependencies {
             implementation(libs.ktor.engine.winhttp)
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "BandKit"
+            url = uri("https://maven.pkg.github.com/har-nick/bandkit")
+            credentials {
+                username = project.findProperty("gh.username") as String
+                password = project.findProperty("gh.publishing.token") as String
+            }
         }
     }
 }

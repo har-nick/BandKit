@@ -1,15 +1,21 @@
 package uk.co.harnick.bandkit.util
 
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
-import io.ktor.utils.io.errors.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.utils.io.errors.IOException
 import uk.co.harnick.bandkit.data.model.RequestType
 import uk.co.harnick.bandkit.data.model.RequestType.GET
 import uk.co.harnick.bandkit.data.model.RequestType.POST
 import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response
-import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Error.*
+import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Error.HttpError
+import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Error.NetworkError
+import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Error.OKError
+import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Error.SerializationError
 import uk.co.harnick.bandkit.data.remote.api.BandcampApi.Response.Success
 
 internal suspend inline fun <reified T> HttpClient.serializedRequest(
@@ -21,15 +27,15 @@ internal suspend inline fun <reified T> HttpClient.serializedRequest(
         POST -> post { block() }
     }
 
-    var hoistedThrow: Throwable?
+    var okError: Throwable?
 
     return runCatching { Success<T>(request.body()) }
         .getOrElse {
-            hoistedThrow = it
+            okError = it
             runCatching { OKError<T>(request.body()) }
                 .getOrElse { e ->
-                    hoistedThrow
-                        ?.let { return SerializationError(hoistedThrow!!.localizedMessage) }
+                    okError
+                        ?.let { return SerializationError(it.message!!) }
                         ?: when (e) {
                             is ClientRequestException -> HttpError(
                                 e.response.status.value,
