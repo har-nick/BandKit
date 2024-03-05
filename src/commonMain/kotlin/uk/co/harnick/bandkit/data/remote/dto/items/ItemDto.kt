@@ -23,7 +23,7 @@ public class ItemDto(
     @SerialName("sale_item_id")
     public val purchaseId: Int,
     @SerialName("sale_item_type")
-    public val parentPurchaseType: String,
+    public val purchaseType: String,
     @SerialName("tralbum_id")
     public val trAlbumId: Long,
     @SerialName("tralbum_type")

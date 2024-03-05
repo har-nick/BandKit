@@ -5,6 +5,9 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.data.model.ImageSize
@@ -48,6 +51,7 @@ public object BandcampApi {
         public sealed class Error<T>(public val cause: String) : Response<T> {
             public data class HttpError<T>(val code: Int, val error: String) : Error<T>(error)
             public data class NetworkError<T>(val error: String) : Error<T>(error)
+
             // Bandcamp returns all request errors as JSON with a 200 (OK) header. I hate it.
             public data class OKError<T>(val errorDto: ErrorResponseDto) : Error<T>(errorDto.errorMessage)
             public data class SerializationError<T>(val error: String) : Error<T>(error)

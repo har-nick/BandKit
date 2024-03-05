@@ -65,8 +65,8 @@ publishing {
             name = "BandKit"
             url = uri("https://maven.pkg.github.com/har-nick/bandkit")
             credentials {
-                username = project.findProperty("gh.username") as String
-                password = project.findProperty("gh.publishing.token") as String
+                username = System.getenv("GH_USERNAME")
+                password = System.getenv("GH_TOKEN_PACKAGE_PUBLISHING")
             }
         }
     }
