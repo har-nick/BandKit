@@ -4,8 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class LookupItemDto(
+internal class LookupItemDto(
     @SerialName("item_type")
-    public val itemType: String,
-    public val purchased: Boolean
+    val itemType: String,
+    val purchased: Boolean
 )

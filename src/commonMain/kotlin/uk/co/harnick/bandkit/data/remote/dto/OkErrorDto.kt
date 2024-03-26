@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ErrorResponseDto(
+public data class OkErrorDto(
     @SerialName("error")
     val isError: Boolean,
     @SerialName("error_message")

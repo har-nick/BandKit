@@ -8,10 +8,10 @@ import kotlinx.serialization.Serializable
 public class PackageDetailsDto(
     public val title: String,
     public val description: String,
-    @Contextual
-    public val private: Any? = null,
-    @Contextual
-    public val killed: Any? = null,
+    @SerialName("private")
+    public val isPrivate: Boolean?,
+    @SerialName("killed")
+    public val isRemoved: Boolean?,
     @SerialName("band_id")
     public val bandId: Long,
     @SerialName("label_id")
@@ -20,9 +20,9 @@ public class PackageDetailsDto(
     public val isSubscriberOnly: Boolean,
     @SerialName("is_live_event")
     public val isLiveEvent: Boolean,
-    @SerialName("live_event_type")
     @Contextual
-    public val liveEventType: Any? = null,
+    @SerialName("live_event_type")
+    public val liveEventType: Any?,
     public val images: List<ImageDto>,
     @SerialName("band_name")
     public val bandName: String,

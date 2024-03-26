@@ -1,6 +1,5 @@
 package uk.co.harnick.bandkit.data.remote.dto.items
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

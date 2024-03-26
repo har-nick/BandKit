@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class CollectionSummaryResponseDto(
+internal class CollectionSummaryResponseDto(
     @SerialName("collection_summary")
-    public val collectionSummaryDto: CollectionSummaryDto,
+    val collectionSummaryDto: CollectionSummaryDto,
     @SerialName("fan_id")
-    public val fanId: Long
+    val ownerId: Long
 )

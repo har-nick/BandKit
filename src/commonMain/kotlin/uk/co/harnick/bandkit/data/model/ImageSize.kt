@@ -1,8 +1,10 @@
 package uk.co.harnick.bandkit.data.model
 
-// For a comprehensive list of resolutions and API representations, see:
-// https://github.com/har-nick/bandcamp-api-docs/wiki/Images
-public enum class ImageSize(internal val apiParam: String) {
+/**
+ * Common values for image resolutions. See the [API documentation](<github.com/har-nick/bandcamp-api-docs/wiki/Images>) for a comprehensive list.
+ * @property [apiParam] Serialized when fetching an image.
+ */
+public enum class ImageSize(public val apiParam: String) {
     // 100x100
     Tiny("3"),
     // 300x300

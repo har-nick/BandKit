@@ -8,12 +8,14 @@ import kotlinx.serialization.Serializable
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
-internal data class CollectionItemsRequestBody(
+internal class CollectionItemsRequestBody(
     @SerialName("fan_id")
-    val userId: Long,
-    @SerialName("count")
-    val itemCount: Int
+    val userId: Long
 ) {
+    @EncodeDefault
+    @SerialName("count")
+    val itemCount: Int = Int.MAX_VALUE
+
     @EncodeDefault
     @SerialName("older_than_token")
     val olderThanToken: String = "${Clock.System.now().epochSeconds}::a::"

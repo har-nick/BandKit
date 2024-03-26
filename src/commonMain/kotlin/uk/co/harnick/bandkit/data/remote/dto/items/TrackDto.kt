@@ -4,13 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class TrackDto(
-    public val id: Long,
-    public val title: String,
-    public val artist: String,
+internal class TrackDto(
+    val id: Long,
+    val title: String,
+    val artist: String,
     @SerialName("track_number")
-    public val trackNumber: Int?,
-    public val duration: Float,
+    val trackNumber: Int,
+    val duration: Double,
     @SerialName("file")
-    public val adaptiveStreamUrl: Map<String, String>
+    val adaptiveStreamUrl: String
 )

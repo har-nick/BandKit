@@ -1,6 +1,5 @@
 package uk.co.harnick.bandkit.data.remote.dto.items
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,9 +7,9 @@ import kotlinx.serialization.Serializable
 public class UrlHintsDto(
     public val subdomain: String,
     @SerialName("custom_domain")
-    public val customDomain: String? = null,
+    public val customDomain: String?,
     @SerialName("custom_domain_verified")
-    public val customDomainVerified: Boolean? = null,
+    public val customDomainVerified: Boolean?,
     public val slug: String,
     @SerialName("item_type")
     public val itemType: String
