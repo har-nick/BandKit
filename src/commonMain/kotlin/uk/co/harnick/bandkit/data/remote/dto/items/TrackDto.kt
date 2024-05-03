@@ -9,8 +9,8 @@ internal class TrackDto(
     val title: String,
     val artist: String,
     @SerialName("track_number")
-    val trackNumber: Int,
-    val duration: Double,
+    val index: Int?,
+    val duration: Float,
     @SerialName("file")
-    val adaptiveStreamUrl: String
+    val adaptiveStreamUrl: Map<String, String>
 )

@@ -1,187 +1,148 @@
 package uk.co.harnick.bandkit.data.remote.dto.items
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
+@Suppress("UNUSED")
 @Serializable
 internal class ItemDto(
     @SerialName("fan_id")
-    internal val ownerId: Long,
+    val fanId: Long,
     @SerialName("item_id")
-    internal val id: Long,
+    val itemId: Long,
     @SerialName("item_type")
-    internal val type: String,
+    val itemType: String,
     @SerialName("band_id")
-    internal val bandId: Long,
+    val bandId: Long,
     @SerialName("added")
-    internal val dateTimeAdded: String,
+    val dateTimeAdded: String,
     @SerialName("updated")
-    internal val dateTimeUpdated: String,
+    val dateTimeUpdated: String,
     @SerialName("purchased")
-    internal val dateTimePurchased: String,
+    val dateTimePurchased: String,
     @SerialName("sale_item_id")
-    internal val saleId: Long,
+    val saleId: Long,
     @SerialName("sale_item_type")
-    internal val saleType: String,
+    val saleType: String,
     @SerialName("tralbum_id")
-    internal val trAlbumId: Long,
+    val trAlbumId: Long,
     @SerialName("tralbum_type")
-    internal val tralbumType: String,
+    val albumType: String,
     @SerialName("featured_track")
-    internal val featuredTrackId: Long,
-    @Contextual
-    @Transient
-    internal val why: Any? = null,
+    val favoriteTrackId: Long,
+    // Guessed type
+    val why: String? = null,
+    // Guessed type
     @SerialName("hidden")
-    @Transient
-    internal val isHidden: Boolean? = null,
-    @Transient
-    internal val index: Int? = null,
+    val isHidden: Boolean? = null,
+    val index: Int?,
     @SerialName("also_collected_count")
-    internal val saleCount: Int,
+    val alsoPurchasedCount: Int,
     @SerialName("url_hints")
-    internal val urlHints: UrlHintsDto,
+    val urlHints: UrlHintsDto,
     @SerialName("item_title")
-    internal val title: String,
+    val title: String,
     @SerialName("item_url")
-    internal val url: String,
+    val url: String,
     @SerialName("item_art_id")
-    internal val artId: Long,
+    val artId: Long,
     @SerialName("item_art_url")
-    @Transient
-    internal val artUrl: String = "",
+    val artUrl: String,
     @SerialName("item_art")
-    @Transient
-    internal val art: ItemArtDto? = null,
+    val art: ItemArtDto,
     @SerialName("band_name")
-    internal val bandName: String,
+    val artistName: String,
     @SerialName("band_url")
-    internal val bandUrl: String,
+    val artistUrl: String,
     @SerialName("genre_id")
-    @Transient
-    internal val genreId: Int? = null,
+    val genreId: Long?,
     @SerialName("featured_track_title")
-    internal val featuredTrackTitle: String,
+    val favoriteTrackTitle: String,
     @SerialName("featured_track_number")
-    internal val featuredTrackNumber: Int?,
+    val favoriteTrackIndex: Int?,
     @SerialName("featured_track_is_custom")
-    internal val featuredTrackIsCustom: Boolean,
+    val favoriteTrackIsCustom: Boolean,
     @SerialName("featured_track_duration")
-    internal val featuredTrackDuration: Double,
+    val favoriteTrackDuration: Float,
     @SerialName("featured_track_url")
-    internal val featuredTrackUrl: String? = null,
+    val favoriteTrackUrl: String?,
     @SerialName("featured_track_encodings_id")
-    @Transient
-    internal val featuredTrackEncodingsId: Long = 0L,
+    val favoriteTrackEncodingsId: Long,
     @SerialName("package_details")
-    @Transient
-    internal val packageDetails: PackageDetailsDto? = null,
+    val packageDetails: PackageDetailsDto?,
     @SerialName("num_streamable_tracks")
-    @Transient
-    internal val streamableTrackCount: Int = 0,
+    val streamableTrackCount: Int,
     @SerialName("is_purchasable")
-    @Transient
-    internal val isPurchasable: Boolean = false,
+    val isPurchasable: Boolean,
     @SerialName("is_private")
-    @Transient
-    internal val isPrivate: Boolean = false,
+    val isPrivate: Boolean,
     @SerialName("is_preorder")
-    @Transient
-    internal val isPreorder: Boolean = false,
+    val isPreorder: Boolean,
     @SerialName("is_giftable")
-    @Transient
-    internal val isGiftable: Boolean = false,
+    val isGiftable: Boolean,
     @SerialName("is_subscriber_only")
-    @Transient
-    internal val isSubscriberOnly: Boolean = false,
+    val isSubscriberOnly: Boolean,
     @SerialName("is_subscription_item")
-    @Transient
-    internal val isSubscriptionItem: Boolean = false,
+    val isSubscriptionItem: Boolean,
     @SerialName("service_name")
-    @Transient
-    internal val serviceName: String? = null,
+    val serviceName: String?,
     @SerialName("service_url_fragment")
-    @Transient
-    internal val serviceUrlFragment: String? = null,
+    val serviceUrlFragment: String?,
     @SerialName("gift_sender_name")
-    @Transient
-    internal val giftSenderName: String? = null,
+    val giftSenderName: String?,
     @SerialName("gift_sender_note")
-    @Transient
-    internal val giftSenderNote: String? = null,
+    val giftSenderNote: String?,
     @SerialName("gift_id")
-    @Transient
-    internal val giftId: Long? = null,
+    val giftId: Long?,
     @SerialName("gift_recipient_name")
-    @Transient
-    internal val giftRecipientName: String? = null,
+    val giftRecipientName: String?,
     @SerialName("album_id")
-    @Transient
-    internal val albumId: Long? = null,
+    val albumId: Long?,
     @SerialName("album_title")
-    @Transient
-    internal val albumTitle: String? = null,
+    val albumTitle: String?,
     @SerialName("listen_in_app_url")
-    @Transient
-    internal val listenInAppUrl: String = "",
+    val listenInAppUrl: String,
     @SerialName("band_location")
-    internal val bandLocation: String? = null,
+    val artistLocation: String?,
     @SerialName("band_image_id")
-    @Transient
-    internal val bandImageId: Long? = null,
+    val artistImageId: Long?,
     @SerialName("release_count")
-    @Transient
-    internal val releaseCount: Int = 0,
+    val releaseCount: Int?,
     @SerialName("message_count")
-    @Transient
-    internal val messageCount: Int = 0,
+    val messageCount: String?,
     @SerialName("is_set_price")
-    @Transient
-    internal val isSetPrice: Boolean = true,
-    @Transient
-    internal val price: Double = 0.00,
+    val isSetPrice: Boolean,
+    val price: Float,
     @SerialName("has_digital_download")
-    @Transient
-    internal val hasDigitalDownload: Boolean? = null,
+    val hasDigitalDownload: Boolean?,
     @SerialName("merch_ids")
-    @Transient
-    internal val merchIds: List<Long>? = null,
+    val merchIds: List<Long>?,
     @SerialName("merch_sold_out")
-    @Transient
-    internal val merchSoldOut: Boolean? = null,
-    @Transient
-    internal val currency: String = "",
-    internal val labelName: String? = null,
+    val merchSoldOut: Boolean?,
+    val currency: String,
+    @SerialName("label")
+    val labelName: String?,
     @SerialName("label_id")
-    internal val labelId: Long? = null,
+    val labelId: Long?,
     @SerialName("require_email")
-    @Transient
-    internal val requireEmail: Boolean? = false,
+    val requireEmail: Boolean?,
     @SerialName("item_art_ids")
-    @Transient
-    internal val itemArtIds: List<Long>? = listOf(),
-    @Contextual
-    @Transient
-    internal val releases: Any? = null,
-    @Contextual
-    @Transient
-    internal val discount: Any? = null,
-    @Transient
-    internal val token: String = "",
+    val artIds: List<Long>?,
+    // Guessed type.
+    val releases: Int? = null,
+    // Guessed type
+    val discount: Float? = null,
+    val token: String,
     @SerialName("variant_id")
-    @Transient
-    internal val variantId: Long? = null,
+    val variantId: Long?,
     @SerialName("merch_snapshot")
-    @Transient
-    internal val merchSnapshot: MerchSnapshotDto? = null,
+    // Guessed type. Likely a class.
+    val merchSnapshot: Map<String, Long?>? = null,
     @SerialName("featured_track_license_id")
-    @Transient
-    internal val featuredTrackLicenseId: Long? = null,
+    val favoriteTrackLicenseId: Long?,
     @SerialName("licensed_item")
-    @Transient
-    internal val isLicensedItem: Boolean? = null,
+    // Guessed type
+    val licensedItem: Boolean? = null,
     @SerialName("download_available")
-    internal val downloadAvailable: Boolean
+    val downloadAvailable: Boolean
 )

@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
     id("maven-publish")
@@ -9,15 +8,10 @@ plugins {
 group = "uk.co.harnick"
 version = "1.0-SNAPSHOT"
 
-android {
-    compileSdk = 34
-    namespace = "uk.co.harnick"
-}
-
 kotlin {
     jvmToolchain(libs.versions.jdk.get().toInt())
-    withSourcesJar(publish = false)
     explicitApi()
+    withSourcesJar(publish = true)
 
     applyDefaultHierarchyTemplate()
     js(IR) {
@@ -25,7 +19,6 @@ kotlin {
         nodejs()
     }
     jvm()
-    androidTarget()
     iosArm64()
     linuxX64()
     mingwX64("windows")
@@ -35,17 +28,20 @@ kotlin {
 
         commonMain.dependencies {
             implementation(libs.bundles.ktor)
+            api(libs.kotlin.result)
             implementation(libs.kotlinx.datetime)
         }
 
-        listOf(jvmMain, androidMain, iosMain, linuxMain).forEach { sourceSet ->
+        listOf(jvmMain, iosMain, linuxMain).forEach { sourceSet ->
             sourceSet.dependencies {
                 implementation(libs.ktor.engine.cio)
             }
         }
+
         jsMain.dependencies {
             implementation(libs.ktor.engine.js)
         }
+
         windowsMain.dependencies {
             implementation(libs.ktor.engine.winhttp)
         }

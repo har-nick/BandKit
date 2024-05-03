@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 public class FollowsDto(
     @SerialName("following")
-    public val following: FollowingDto
+    public val following: Map<Long, Boolean>
 )

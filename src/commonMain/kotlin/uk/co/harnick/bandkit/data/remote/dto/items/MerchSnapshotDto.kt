@@ -3,14 +3,15 @@ package uk.co.harnick.bandkit.data.remote.dto.items
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
 internal class MerchSnapshotDto(
     @SerialName("package_type_id")
-    internal val packageTypeId: Long?,
+    val packageTypeId: Long?,
     @SerialName("merch_art_0")
-    internal val merchArt0: Int,
+    val merchArt0: Long,
     @SerialName("merch_art_1")
-    internal val merchArt1: Int?,
+    val merchArt1: Long,
     @SerialName("merch_art_2")
-    internal val merchArt2: Int?
+    val merchArt2: Long
 )

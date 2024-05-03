@@ -6,9 +6,10 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
-internal class CollectionItemsRequestBody(
+internal class CollectionItemsRequestBodyDto(
     @SerialName("fan_id")
     val userId: Long
 ) {

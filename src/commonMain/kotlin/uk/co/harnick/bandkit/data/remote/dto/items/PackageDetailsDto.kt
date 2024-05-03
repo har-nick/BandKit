@@ -1,33 +1,32 @@
 package uk.co.harnick.bandkit.data.remote.dto.items
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
-public class PackageDetailsDto(
-    public val title: String,
-    public val description: String,
+internal class PackageDetailsDto(
+    val title: String,
+    val description: String,
     @SerialName("private")
-    public val isPrivate: Boolean?,
+    val isPrivate: Boolean?,
     @SerialName("killed")
-    public val isRemoved: Boolean?,
+    val purchasable: Boolean?,
     @SerialName("band_id")
-    public val bandId: Long,
+    val artistId: Long,
     @SerialName("label_id")
-    public val labelId: Long?,
+    val labelId: Long?,
     @SerialName("is_subscriber_only")
-    public val isSubscriberOnly: Boolean,
+    val isSubscriberOnly: Boolean,
     @SerialName("is_live_event")
-    public val isLiveEvent: Boolean,
-    @Contextual
+    val isLiveEvent: Boolean,
     @SerialName("live_event_type")
-    public val liveEventType: Any?,
-    public val images: List<ImageDto>,
+    val liveEventType: String?,
+    val images: List<ImageDto>,
     @SerialName("band_name")
-    public val bandName: String,
+    val artistName: String,
     @SerialName("url_hints")
-    public val urlHints: UrlHintsDto,
+    val urlHints: UrlHintsDto,
     @SerialName("item_url")
-    public val itemUrl: String
+    val itemUrl: String
 )

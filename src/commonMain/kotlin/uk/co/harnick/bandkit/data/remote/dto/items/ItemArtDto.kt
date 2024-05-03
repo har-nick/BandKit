@@ -3,11 +3,12 @@ package uk.co.harnick.bandkit.data.remote.dto.items
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
-public class ItemArtDto(
-    public val url: String,
+internal class ItemArtDto(
+    val url: String,
     @SerialName("thumb_url")
-    public val thumbnailUrl: String,
+    val thumbUrl: String,
     @SerialName("art_id")
-    public val id: Long
+    val artId: Long
 )

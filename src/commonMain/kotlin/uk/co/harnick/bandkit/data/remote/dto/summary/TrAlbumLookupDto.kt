@@ -10,7 +10,7 @@ public class TrAlbumLookupDto(
     @SerialName("item_id")
     public val itemId: Long,
     @SerialName("band_id")
-    public val bandId: Long,
+    public val artistId: Long,
     @SerialName("purchased")
     public val datePurchased: String,
 )
