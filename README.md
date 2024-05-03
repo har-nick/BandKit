@@ -17,7 +17,9 @@ Since it's built with Kotlin Multiplatform, it supports Java, JS, and of course 
 
 For now, packages are available through Github. You can access common functions through the `BandKit` object.
 
-For detailed installation instructions and usage examples, see the [Wiki](https://github.com/har-nick/BandKit/wiki).
+For detailed installation instructions see the [Wiki](https://github.com/har-nick/BandKit/wiki).
+
+Usage samples will be uploaded in time, however the code documentation is pretty complete (in my opinion). 
 
 ## Support & Contribution
 
