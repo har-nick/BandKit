@@ -2,6 +2,11 @@
 
 The Bandcamp API library you wish you had 4 years ago.
 
+> [!WARNING]
+> Consider this library to be experimental. The types given for deserialisation are based on my own account's data.
+> 
+> I'll likely need more bug reports and sample data to consider this library stable.
+
 ## Description
 
 BandKit is a wrapper library for Bandcamp's API. It wraps around common network requests to provide type-safe accessors to users and their library data.
