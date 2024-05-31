@@ -3,7 +3,6 @@ package uk.co.harnick.bandkit.data.remote.dto.items
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Suppress("UNUSED")
 @Serializable
 internal class ItemDto(
     @SerialName("fan_id")
