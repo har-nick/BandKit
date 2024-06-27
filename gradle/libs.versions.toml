@@ -2,11 +2,11 @@
 jdk = "21"
 dokka = "1.9.20" # https://github.com/Kotlin/dokka/releases
 kotlin = "2.0.0" # https://kotlinlang.org/docs/releases.html#release-details
-ktor = "2.3.11" # https://ktor.io/docs/releases.html#release-details
+ktor = "2.3.12" # https://ktor.io/docs/releases.html#release-details
 
 [libraries]
 kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "2.0.0" }
-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.0-RC.2" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.0" }
 
 # Ktor
 ktor-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
