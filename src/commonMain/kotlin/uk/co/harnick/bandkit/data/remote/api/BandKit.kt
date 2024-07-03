@@ -111,13 +111,13 @@ public object BandKit {
      * @return An instance of [LibraryItem] if the [API response][ApiResponse] is successful.
      * @see [User]
      */
-    public suspend fun fetchUser(id: Long, username: String): ApiResponse<User> {
+    public suspend fun fetchUser(userId: Long, username: String): ApiResponse<User> {
         return runCatching { client.get("$BASE_URL/$username").bodyAsText() }
-            .map { pageHtml -> User(pageHtml, id, username) }
+            .map { pageHtml -> User(pageHtml, userId, username) }
     }
 
-    internal suspend fun getFollowers(id: Long): ApiResponse<List<Follower>> {
-        val serializedBody = Json.encodeToString(FollowersRequestBody(id))
+    public suspend fun fetchFollowers(userId: Long): ApiResponse<List<Follower>> {
+        val serializedBody = Json.encodeToString(FollowersRequestBody(userId))
 
         return client
             .deserializedRequest<FollowersResponseDto>(POST) {
@@ -128,8 +128,8 @@ public object BandKit {
             .map { it.followers.map { dto -> dto.toFollower() } }
     }
 
-    internal suspend fun getFollowedArtists(id: Long): ApiResponse<List<ArtistFollowee>> {
-        val serializedBody = Json.encodeToString(FollowersRequestBody(id))
+    public suspend fun fetchFollowedArtists(userId: Long): ApiResponse<List<ArtistFollowee>> {
+        val serializedBody = Json.encodeToString(FollowersRequestBody(userId))
 
         return client
             .deserializedRequest<ArtistFolloweeResponseDto>(POST) {
@@ -140,8 +140,8 @@ public object BandKit {
             .map { it.followees.map { dto -> dto.toArtistFollowee() } }
     }
 
-    internal suspend fun getFollowedFans(id: Long): ApiResponse<List<FanFollowee>> {
-        val serializedBody = Json.encodeToString(FollowersRequestBody(id))
+    public suspend fun fetchFollowedFans(userId: Long): ApiResponse<List<FanFollowee>> {
+        val serializedBody = Json.encodeToString(FollowersRequestBody(userId))
 
         return client
             .deserializedRequest<FanFolloweeResponseDto>(POST) {

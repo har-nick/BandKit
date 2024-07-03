@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 internal class FollowersResponseDto(
-    // Yes, this is actually a misspelling.
+    // Yes, this misspelling is intended.
     @SerialName("followeers")
     val followers: List<FollowerDto>,
     @SerialName("more_available")

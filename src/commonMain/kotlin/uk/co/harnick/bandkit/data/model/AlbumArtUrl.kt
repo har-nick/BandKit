@@ -1,7 +1,7 @@
 package uk.co.harnick.bandkit.data.model
 
 import uk.co.harnick.bandkit.data.model.ImageSize.Small
-import uk.co.harnick.bandkit.data.remote.api.BandKit.Sources.IMAGES
+import uk.co.harnick.bandkit.data.remote.api.BandKit
 
 /**
  * Creates a functional url to request an [item's][LibraryItem] album art.
@@ -13,5 +13,5 @@ public class AlbumArtUrl(private val id: Long, private val size: String = Small.
     public constructor(id: Long) : this(id, Small)
     public constructor(id: Long, size: Int) : this(id, "$size")
 
-    override fun toString(): String = "$IMAGES/a${id}_${size}.jpg"
+    override fun toString(): String = "${BandKit.Sources.IMAGES}/a${id}_${size}.jpg"
 }
