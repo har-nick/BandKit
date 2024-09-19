@@ -2,24 +2,29 @@
 
 The Bandcamp API library you wish you had 4 years ago.
 
-> [!WARNING]
-> Consider this library to be experimental. The types given for deserialisation are based on my own account's data.
-> 
-> I'll likely need more bug reports and sample data to consider this library stable.
+> [!CAUTION]
+> This library is under heavy development. Expect breaking changes every release.
 
 ## Description
 
-BandKit is a wrapper library for Bandcamp's API. It wraps around common network requests to provide type-safe accessors to users and their library data.
+BandKit creates network requests to provide (somewhat) type-safe accessors to users and their library data.
 
-Since it's built with Kotlin Multiplatform, it supports Java, JS, and of course Kotlin Native targets.
+## Features
+ - Multiplatform support for Mobile, Desktop, and the Web!
+ - Expanded programmatic access to recommendations, account, and library data.
+ - Support for downloading in all available encodings (limited to purchased content).
 
-## Installation & Usage
+## Installation
 
-For now, packages are available through Github. You can access common functions through the `BandKit` object.
+For now, artifacts are available through Github Packages. For installation support, see the [Github Packages documentation](https://docs.github.com/en/packages).
 
-For detailed installation instructions see the [Wiki](https://github.com/har-nick/BandKit/wiki).
+## Usage
 
-Usage samples will be uploaded in time, however the code documentation is pretty complete (in my opinion). 
+Common functions can be accessed through the `BandKit` object. exposed by the library.
+
+## Upcoming Features
+
+To keep track of upcoming features, you can reference this repository's [Projects](https://github.com/har-nick/BandKit/projects) page.
 
 ## Support & Contribution
 
