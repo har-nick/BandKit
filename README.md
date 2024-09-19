@@ -16,11 +16,13 @@ BandKit creates network requests to provide (somewhat) type-safe accessors to us
 
 ## Installation
 
-For now, artifacts are available through Github Packages. For installation support, see the [Github Packages documentation](https://docs.github.com/en/packages).
+For now, artifacts are available through Github Packages.
+
+For guidance on installation, see the [Github Packages documentation](https://docs.github.com/en/packages).
 
 ## Usage
 
-Common functions can be accessed through the `BandKit` object. exposed by the library.
+Common functions can be accessed through the `BandKit` object exposed by the library.
 
 ## Upcoming Features
 
