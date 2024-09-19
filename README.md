@@ -26,7 +26,7 @@ Common functions can be accessed through the `BandKit` object exposed by the lib
 
 ## Upcoming Features
 
-To keep track of upcoming features, you can reference this repository's [Projects](https://github.com/har-nick/BandKit/projects) page.
+To keep track of upcoming features, you can reference this repository's [Projects](https://github.com/users/har-nick/projects/4) page.
 
 ## Support & Contribution
 
