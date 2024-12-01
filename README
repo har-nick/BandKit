@@ -1,0 +1,56 @@
+BandKit is a Kotlin Multiplatform API wrapper around basic Bandcamp functions to help you create your own projects.
+
+Platforms
+---------
+BandKit is written in pure Kotlin and so it should support any platform supported by JetBrains.
+This includes, but is not limited to:
+    - JVM
+    - Android
+    - Native (Desktop)
+        > Windows (via MinGW)
+        > MacOS
+        > Linux
+    - Native (Mobile)
+        > Android NDK
+        > iOS / tvOS / watchOS
+
+Capabilities
+------------
+BandKit is currently capable of:
+    - Fetching user-related data, including profile information, followers, and following
+    - Fetching library data, and exposes stream URLs in MP3-V0 format
+
+Upcoming features include:
+    - Bandcamp Radio support
+    - Downloading purchased albums in full quality, with full codec support
+    - Recommendations based on genre and location
+    - Proper pagination support where applicable
+
+Downloading
+-----------
+BandKit is currently only available on Github via Github Packages.
+Maven Central support is upcoming once the library is more complete.
+
+Support for KMP libraries is unavailable in JitPack, so support isn't planned for now:
+    https://github.com/jitpack/jitpack.io/issues/3853
+
+Usage
+------
+For detailed usage instructions, see this repository's wiki:
+    https://github.com/har-nick/BandKit/wiki/Usage
+
+For further pointers, search for comments with "NOTE".
+
+Documentation
+-------------
+Dokka integration is planned and upcoming.
+
+Contribution
+------------
+This repository requires much more information before I can consider it stable.
+
+To contribute type-data, search for values typed as `UnknownType`. These are deserialized as strings for now.
+To contribute contextual information, search for comments with "MORE INFO NEEDED".
+
+I am also considering adding further "helper" functions, which would mean implementing concrete models of data.
+This is unplanned, pending thoughts from other contributors, along with better type specification for endpoint data.
