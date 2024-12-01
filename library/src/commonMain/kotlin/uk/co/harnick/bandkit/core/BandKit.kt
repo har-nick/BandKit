@@ -18,6 +18,7 @@ public class BandKit(internal val client: HttpClient) {
     public object Library {
         public const val SUMMARY: String = "$BASE_URL/api/fan/2/collection_summary"
         public const val ITEMS: String = "$BASE_URL/api/fancollection/1/collection_items"
+        public const val DOWNLOADING: String = "https://popplers5.bandcamp.com/download/album"
     }
 
     init {
