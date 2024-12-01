@@ -14,7 +14,7 @@ kotlin {
     withSourcesJar(publish = true)
 
     applyDefaultHierarchyTemplate()
-    js(IR) {
+    js {
         browser()
         nodejs()
     }
