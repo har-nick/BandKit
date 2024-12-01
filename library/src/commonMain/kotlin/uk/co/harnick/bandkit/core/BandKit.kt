@@ -7,6 +7,7 @@ import io.ktor.client.plugins.plugin
 public class BandKit(internal val client: HttpClient) {
     public companion object {
         public const val BASE_URL: String = "https://bandcamp.com"
+        internal val hosts = listOf("bandcamp.com", "popplers5.bandcamp.com")
     }
 
     public object Account {
@@ -21,7 +22,9 @@ public class BandKit(internal val client: HttpClient) {
         public const val DOWNLOADING: String = "https://popplers5.bandcamp.com/download/album"
     }
 
+
     init {
+        // Check required plugins are installed to passed client.
         client.plugin(BandKitPlugin)
         client.plugin(ContentNegotiation)
     }
