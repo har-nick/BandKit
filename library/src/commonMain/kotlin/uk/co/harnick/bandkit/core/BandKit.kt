@@ -3,12 +3,8 @@ package uk.co.harnick.bandkit.core
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.plugin
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 public class BandKit(internal val client: HttpClient) {
-    internal val scope = CoroutineScope(Dispatchers.Main)
-
     public companion object {
         public const val BASE_URL: String = "https://bandcamp.com"
     }

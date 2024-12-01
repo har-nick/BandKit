@@ -1,5 +1,4 @@
 [versions]
-coroutines = "1.9.0"
 dokka = "1.9.20"
 jdk = "21"
 kotlin = "2.0.20"
@@ -7,9 +6,6 @@ ktor = "3.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-
-# Coroutines
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
 # Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
