@@ -23,9 +23,11 @@ BandKit is currently capable of:
     - Listing download links for albums in all available codecs
 
 Upcoming features include:
+    - Getting artist data, such as discography and location
     - Bandcamp Radio support
     - Recommendations based on genre and location
     - Proper pagination support where applicable
+    - Optional local/persistant caching of aggregate data
 
 Downloading
 -----------
