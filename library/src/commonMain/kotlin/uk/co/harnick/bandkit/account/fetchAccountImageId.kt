@@ -13,14 +13,9 @@ import uk.co.harnick.bandkit.core.BandKit
  */
 public suspend fun BandKit.fetchAccountImageId(
     url: String
-): Long? {
-    val response = client.get(url)
-        .bodyAsText()
+): Long? = client.get(url)
+    .bodyAsText()
+    .substringAfter("<a class=\"popupImage\" href=\"https://f4.bcbits.com/img/")
+    .substringBefore("_")
+    .toLongOrNull()
 
-    println(response)
-
-    return response
-        .substringAfter("<a class=\"popupImage\" href=\"https://f4.bcbits.com/img/")
-        .substringBefore("_")
-        .toLongOrNull()
-}
