@@ -1,4 +1,7 @@
-BandKit is a Kotlin Multiplatform API wrapper around basic Bandcamp functions to help you create your own projects.
+Description
+-----------
+BandKit is a Kotlin Multiplatform library that models individual API requests with type-safe(ish) data.
+Since Bandcamp has no public-facing API (anymore), BandKit was created out of necessity to support development of third-party projects.
 
 Platforms
 ---------
@@ -18,23 +21,26 @@ This includes, but is not limited to:
 Capabilities
 ------------
 BandKit is currently capable of:
-    - Fetching user-related data, including profile information, followers, and following
+    - Fetching user-related data, including profile information, and followed/following accounts
     - Fetching library data, and exposing stream URLs in MP3-V0 format 
-    - Listing download links for albums in all available codecs
+    - Listing download links for purchased albums in all available codecs
 
 Upcoming features include:
+    - Search functionality
     - Getting artist data, such as discography and location
+
+Potential upcoming features include:
     - Bandcamp Radio support
+    - Pagination handling
+    - Optional local/persistant caching of aggregated data
     - Recommendations based on genre and location
-    - Proper pagination support where applicable
-    - Optional local/persistant caching of aggregate data
 
 Downloading
 -----------
 Maven Central support is upcoming once the library is more complete.
 For now, please clone this repository and build manually.
 
-Support for KMP libraries is unavailable in JitPack, so support isn't planned for now:
+Building KMP libraries via JitPack isn't supported, so publishing there is unplanned for now:
     https://github.com/jitpack/jitpack.io/issues/3853
 
 Usage
@@ -54,6 +60,3 @@ This repository requires much more information before I can consider it stable.
 
 To contribute type-data, search for values typed as `JsonElement`. These are deserialized as strings for now.
 To contribute contextual information, search for comments with "MORE INFO NEEDED".
-
-I am also considering adding further "helper" functions, which would mean implementing concrete models of data.
-This is unplanned, pending thoughts from other contributors, along with better type specification for endpoint data.

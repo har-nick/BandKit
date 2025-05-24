@@ -76,7 +76,6 @@ public class LibraryItem private constructor(
     @SerialName("item_art_url")
     public val artUrl: String,
 
-    // NOTE: Contained Urls are not lossless.
     @SerialName("item_art")
     public val artInfo: ArtInfo,
 
@@ -94,7 +93,6 @@ public class LibraryItem private constructor(
     @SerialName("featured_track_title")
     public val favoriteTrackTitle: String,
 
-    // NOTE:    This is the track's index in its relevant tracklist.
     @SerialName("featured_track_number")
     public val favoriteTrackIndex: Int?,
 
@@ -160,8 +158,7 @@ public class LibraryItem private constructor(
     @SerialName("album_title")
     public val albumTitle: String?,
 
-    // NOTE:    Intended for use in the Bandcamp app.
-    //          Useless otherwise, as far as I know.
+    // NOTE:    Intended for use in the Bandcamp app. Useless otherwise, as far as I know.
     @SerialName("listen_in_app_url")
     public val listenInAppUrl: String,
 

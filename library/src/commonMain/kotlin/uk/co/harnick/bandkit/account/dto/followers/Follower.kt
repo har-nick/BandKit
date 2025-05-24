@@ -34,7 +34,7 @@ public class Follower private constructor(
     @SerialName("date_followed")
     public val dateFollowed: String,
 
-    // NOTE:                Structure => (timestamp of request):(`fan_id`)
+    // NOTE:    Structure => (timestamp of request):(`fan_id`)
     @SerialName("token")
     public val token: String
 )
