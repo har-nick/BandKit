@@ -13,23 +13,26 @@ This includes, but is not limited to:
     - Native (Mobile)
         > Android NDK
         > iOS / tvOS / watchOS
+    - Web (npm)
 
 Capabilities
 ------------
 BandKit is currently capable of:
     - Fetching user-related data, including profile information, followers, and following
-    - Fetching library data, and exposes stream URLs in MP3-V0 format
+    - Fetching library data, and exposing stream URLs in MP3-V0 format 
+    - Listing download links for albums in all available codecs
 
 Upcoming features include:
+    - Getting artist data, such as discography and location
     - Bandcamp Radio support
-    - Downloading purchased albums in full quality, with full codec support
     - Recommendations based on genre and location
     - Proper pagination support where applicable
+    - Optional local/persistant caching of aggregate data
 
 Downloading
 -----------
-BandKit is currently only available on Github via Github Packages.
 Maven Central support is upcoming once the library is more complete.
+For now, please clone this repository and build manually.
 
 Support for KMP libraries is unavailable in JitPack, so support isn't planned for now:
     https://github.com/jitpack/jitpack.io/issues/3853
