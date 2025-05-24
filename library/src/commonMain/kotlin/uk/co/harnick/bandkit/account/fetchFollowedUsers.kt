@@ -1,40 +1,35 @@
 package uk.co.harnick.bandkit.account
 
-import io.ktor.client.call.body
-import io.ktor.client.request.accept
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.client.request.url
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
+import io.ktor.http.HttpMethod
 import io.ktor.util.date.getTimeMillis
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUsersResponseDto
-import uk.co.harnick.bandkit.account.dto.followers.FollowersRequestDto
+import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUserError
+import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUserRequest
+import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUsersResponse
 import uk.co.harnick.bandkit.core.BandKit
+import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
+import uk.co.harnick.bandkit.core.getApiResponse
 
 public suspend fun BandKit.fetchFollowedUsers(
     userId: Long,
     accountLimit: Int = Int.MAX_VALUE,
     timestampCursor: Long = getTimeMillis(),
     userIdCursor: Long? = null
-): FollowedUsersResponseDto {
+): FollowedUsersResponse {
+    val url = "$BASE_URL/api/fancollection/1/following_fans"
+
     val paginationToken = buildString {
         append(timestampCursor)
         append(userIdCursor ?: "::a::")
     }
 
-    val reqBody = Json.encodeToString(
-        FollowersRequestDto(userId, accountLimit, paginationToken)
+    val requestBody = Json.encodeToString(
+        FollowedUserRequest(userId, accountLimit, paginationToken)
     )
 
-    val response = client.post {
-        url(BandKit.Account.FOLLOWING_USERS)
-        contentType(ContentType.Application.Json)
-        accept(ContentType.Application.Json)
-        setBody(reqBody)
-    }
-
-    return response.body<FollowedUsersResponseDto>()
+    return getApiResponse<FollowedUsersResponse, FollowedUserError>(
+        url = url,
+        httpMethod = HttpMethod.Post,
+        body = requestBody
+    )
 }

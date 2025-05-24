@@ -4,17 +4,20 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.core.BandKit
-import uk.co.harnick.bandkit.library.dto.download.DownloadOptionDto
-import uk.co.harnick.bandkit.util.Encoding
+import uk.co.harnick.bandkit.core.BandKit.Encoding
+import uk.co.harnick.bandkit.library.dto.download.DownloadOption
 
+// This deserialization sucks. I'm not changing it.
 public suspend fun BandKit.fetchItemDownloadUrls(
     encoding: Encoding,
     itemId: Long,
     signature: String,
     saleId: Long
-): List<DownloadOptionDto> {
+): Map<Encoding, String?> {
+    val baseDownloadUrl = "https://popplers5.bandcamp.com/download/album"
+
     val requestUrl = """
-        ${BandKit.Library.DOWNLOADING}
+        $baseDownloadUrl
         ?enc=${encoding.apiRef}
         &id=$itemId
         &sig=$signature
@@ -28,6 +31,7 @@ public suspend fun BandKit.fetchItemDownloadUrls(
         .replace("&quot;", "&")
         .replace("&amp;", "&")
 
-    val data: Map<String, DownloadOptionDto> = Json.decodeFromString(json)
-    return data.values.toList()
+    val data: Map<String, DownloadOption> = Json.decodeFromString(json)
+
+    return Encoding.entries.associateWith { enum -> data[enum.apiRef]?.url }
 }

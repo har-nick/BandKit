@@ -49,7 +49,7 @@ Contribution
 ------------
 This repository requires much more information before I can consider it stable.
 
-To contribute type-data, search for values typed as `UnknownType`. These are deserialized as strings for now.
+To contribute type-data, search for values typed as `JsonElement`. These are deserialized as strings for now.
 To contribute contextual information, search for comments with "MORE INFO NEEDED".
 
 I am also considering adding further "helper" functions, which would mean implementing concrete models of data.

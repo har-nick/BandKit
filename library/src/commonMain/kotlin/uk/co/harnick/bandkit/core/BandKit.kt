@@ -2,30 +2,55 @@ package uk.co.harnick.bandkit.core
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.plugin
+import io.ktor.client.plugins.pluginOrNull
+import uk.co.harnick.bandkit.core.BandKitException.MissingPluginException
 
 public class BandKit(internal val client: HttpClient) {
+    init {
+        client.pluginOrNull(BandKitPlugin) ?: throw MissingPluginException(
+            "BandKit plugin has not been installed to the passed HttpClient."
+        )
+
+        client.pluginOrNull(ContentNegotiation) ?: throw MissingPluginException(
+            "ContentNegotiation plugin has not been installed to the passed HttpClient."
+        )
+    }
+
     public companion object {
         public const val BASE_URL: String = "https://bandcamp.com"
         internal val hosts = listOf("bandcamp.com", "popplers5.bandcamp.com")
     }
 
-    public object Account {
-        public const val FOLLOWERS: String = "$BASE_URL/api/fancollection/1/followers"
-        public const val FOLLOWING_USERS: String = "$BASE_URL/api/fancollection/1/following_fans"
-        public const val FOLLOWING_ARTISTS: String = "$BASE_URL/api/fancollection/1/following_bands"
+    public class Config {
+        public var token: String? = null
+        public var userAgent: String =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
     }
 
-    public object Library {
-        public const val SUMMARY: String = "$BASE_URL/api/fan/2/collection_summary"
-        public const val ITEMS: String = "$BASE_URL/api/fancollection/1/collection_items"
-        public const val DOWNLOADING: String = "https://popplers5.bandcamp.com/download/album"
+    public enum class ImageSize(public val apiRef: Int) {
+        Small(50),
+        Medium(4),
+        Large(5),
+        Largest(10)
     }
 
+    public enum class Encoding(public val apiRef: String) {
+        AAC("aac-hi"),
+        AIFF("aiff-lossless"),
+        ALAC("alac"),
+        FLAC("flac"),
+        MP3_320("mp3-320"),
+        MP3_V0("mp3-v0"),
+        OGG("vorbis"),
+        WAV("wav")
+    }
 
-    init {
-        // Check required plugins are installed to passed client.
-        client.plugin(BandKitPlugin)
-        client.plugin(ContentNegotiation)
+    public enum class SearchFilter(
+        public val apiRef: String
+    ) {
+        None(""),
+        Artists("b"),
+        Items("a"),
+        Tracks("t")
     }
 }

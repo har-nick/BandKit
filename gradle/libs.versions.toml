@@ -1,11 +1,13 @@
 [versions]
 dokka = "1.9.20"
 jdk = "21"
-kotlin = "2.0.20"
-ktor = "3.0.1"
+kotlin = "2.1.0"
+ktor = "3.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.2" }
 
 # Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
