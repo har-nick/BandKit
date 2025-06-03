@@ -2,16 +2,15 @@ package uk.co.harnick.bandkit.account.dto.followed.user
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import uk.co.harnick.bandkit.account.dto.followed.artist.FollowedArtist
 
 @Serializable
-public class FollowedUsersResponse private constructor(
+public class FollowedUsersResponse internal constructor(
     // NOTE:    sic.
     @SerialName("followeers")
-    public val followers: List<FollowedArtist>,
+    public val followed: List<FollowedUser>,
 
     @SerialName("more_available")
-    public val moreFollowersAvailable: Boolean,
+    public val moreUsersAvailable: Boolean,
 
     @SerialName("last_token")
     public val paginationToken: String

@@ -18,8 +18,11 @@ public suspend fun BandKit.fetchFollowedUsers(
 ): FollowedUsersResponse {
     val url = "$BASE_URL/api/fancollection/1/following_fans"
 
+    // getTimeMillis is too accurate. We need to truncate to prevent a request error.
+    val trimmedTimestamp = "$timestampCursor".slice(0..11).toLong()
+
     val paginationToken = buildString {
-        append(timestampCursor)
+        append(trimmedTimestamp)
         append(userIdCursor ?: "::a::")
     }
 

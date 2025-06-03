@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
 @Serializable
-public class LibraryItemsResponse private constructor(
+public class LibraryItemsResponse internal constructor(
     @SerialName("items")
     public val libraryItems: List<LibraryItem>,
 

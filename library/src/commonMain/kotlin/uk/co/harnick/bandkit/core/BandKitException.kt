@@ -7,19 +7,6 @@ public sealed class BandKitException(override val message: String) : Exception(m
         message: String
     ) : BandKitException(message)
 
-    public class DeserializationException internal constructor(
-        url: String,
-        rawBody: String,
-        ktxSerializationError: String?
-    ) : BandKitException(
-        """
-            BandKit failed to deserialize response data to the model:
-            ENDPOINT:           $url
-            POINT OF FAILURE:   $ktxSerializationError
-            RAW BODY:           \n$rawBody\n
-        """.trimIndent()
-    )
-
     public class MissingPluginException internal constructor(
         message: String
     ) : BandKitException(message)

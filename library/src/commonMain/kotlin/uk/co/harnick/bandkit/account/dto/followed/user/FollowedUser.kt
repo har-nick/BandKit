@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FollowedUser private constructor(
+public class FollowedUser internal constructor(
     @SerialName("fan_id")
-    public val fanId: Long,
+    public val userId: Long,
 
     @SerialName("band_id")
     public val artistId: Long?,
@@ -17,17 +17,16 @@ public class FollowedUser private constructor(
     public val fanUrl: String?,
 
     @SerialName("image_id")
-    public val avatarId: Long,
+    public val avatarId: Long?,
 
     @SerialName("trackpipe_url")
-    public val userUrl: String,
+    public val url: String,
 
     @SerialName("name")
     public val displayName: String,
 
-    // MORE INFO NEEDED:    Seems redundant?
     @SerialName("is_following")
-    public val userIsFollowing: Boolean,
+    public val isMutual: Boolean,
 
     @SerialName("location")
     public val location: String?,

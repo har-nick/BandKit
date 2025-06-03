@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class LookupItem private constructor(
+public class LookupItem internal constructor(
     @SerialName("item_type")
     public val type: String,
 

@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FollowedArtistsResponse private constructor(
+public class FollowedArtistsResponse internal constructor(
     // NOTE:    sic.
     @SerialName("followeers")
-    public val followers: List<FollowedArtist>,
+    public val followed: List<FollowedArtist>,
 
     @SerialName("more_available")
     public val moreFollowersAvailable: Boolean,

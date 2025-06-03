@@ -8,9 +8,9 @@ internal data class FollowersRequest(
     @SerialName("fan_id")
     internal val userId: Long,
 
-    @SerialName("count")
-    internal val itemLimit: Int,
-
     @SerialName("older_than_token")
-    internal val olderThanToken: String
+    internal val olderThanToken: String,
+
+    @SerialName("count")
+    internal val accountLimit: Int
 )

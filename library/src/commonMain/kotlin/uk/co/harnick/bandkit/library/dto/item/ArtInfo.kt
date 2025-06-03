@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class ArtInfo private constructor(
+public class ArtInfo internal constructor(
     @SerialName("url")
     public val url: String,
 

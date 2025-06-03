@@ -1,5 +1,7 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
-    alias(libs.plugins.dokka)
+//    alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ktx.serialization)
     alias(libs.plugins.vanniktech.maven.publish)
@@ -14,6 +16,7 @@ kotlin {
     withSourcesJar(publish = true)
 
     applyDefaultHierarchyTemplate()
+
     js {
         browser()
         nodejs()
@@ -22,6 +25,12 @@ kotlin {
     iosArm64()
     linuxX64()
     mingwX64("windows")
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
 
     sourceSets {
         commonMain.dependencies {

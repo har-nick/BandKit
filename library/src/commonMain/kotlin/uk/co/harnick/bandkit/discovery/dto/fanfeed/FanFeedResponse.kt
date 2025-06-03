@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FanFeedResponse private constructor(
+public class FanFeedResponse internal constructor(
     @SerialName("okay")
     public val okay: Boolean,
 

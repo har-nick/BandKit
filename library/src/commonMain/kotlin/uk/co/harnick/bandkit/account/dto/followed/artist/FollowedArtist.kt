@@ -2,10 +2,10 @@ package uk.co.harnick.bandkit.account.dto.followed.artist
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import uk.co.harnick.bandkit.library.dto.item.UrlHints
+import kotlinx.serialization.json.JsonElement
 
 @Serializable
-public class FollowedArtist private constructor(
+public class FollowedArtist internal constructor(
     @SerialName("band_id")
     public val artistId: Long,
 
@@ -21,12 +21,12 @@ public class FollowedArtist private constructor(
     @SerialName("name")
     public val displayName: String,
 
-    // MORE INFO NEEDED:    Seems redundant?
     @SerialName("is_following")
     public val userIsFollowing: Boolean,
 
+    // MORE INFO NEEDED:    Assuming this is a boolean, but missing data to be sure.
     @SerialName("is_subscribed")
-    public val userIsSubscribed: Boolean,
+    public val userIsSubscribed: JsonElement,
 
     @SerialName("location")
     public val location: String?,

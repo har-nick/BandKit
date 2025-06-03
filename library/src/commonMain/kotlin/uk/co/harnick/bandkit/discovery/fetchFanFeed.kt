@@ -16,8 +16,11 @@ public suspend fun BandKit.fetchFanFeed(
 ): FanFeedResponse {
     val url = "$BASE_URL/fan_dash_feed_updates"
 
+    // getTimeMillis is too accurate. We need to truncate to prevent a request error.
+    val trimmedTimestamp = "$olderThan".slice(0..11).toLong()
+
     val requestBody = Json.encodeToString(
-        FanFeedRequest(fanId, olderThan)
+        FanFeedRequest(fanId, trimmedTimestamp)
     )
 
     return getApiResponse<FanFeedResponse, FanFeedErrorDto>(url, HttpMethod.Get, requestBody)

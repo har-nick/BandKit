@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FollowersResponse private constructor(
+public class FollowersResponse internal constructor(
     // NOTE:    sic.
     @SerialName("followeers")
     public val followers: List<Follower>,

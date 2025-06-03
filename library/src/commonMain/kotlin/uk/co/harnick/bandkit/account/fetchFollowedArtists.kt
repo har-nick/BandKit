@@ -18,13 +18,16 @@ public suspend fun BandKit.fetchFollowedArtists(
 ): FollowedArtistsResponse {
     val url = "$BASE_URL/api/fancollection/1/following_bands"
 
+    // getTimeMillis is too accurate. We need to truncate to prevent a request error.
+    val trimmedTimestamp = "$timestampCursor".slice(0..11).toLong()
+
     val paginationToken = buildString {
-        append(timestampCursor)
+        append(trimmedTimestamp)
         append(userIdCursor ?: "::a::")
     }
 
     val requestBody = Json.encodeToString(
-        FollowersRequest(userId, accountLimit, paginationToken)
+        FollowersRequest(userId, paginationToken, accountLimit)
     )
 
     return getApiResponse<FollowedArtistsResponse, FollowedArtistError>(

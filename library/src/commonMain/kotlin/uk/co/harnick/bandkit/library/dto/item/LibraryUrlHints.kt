@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
 @Serializable
-public class UrlHints private constructor(
+public class LibraryUrlHints internal constructor(
     @SerialName("subdomain")
     public val subdomain: String,
 
     @SerialName("custom_domain")
-    public val customDomain: JsonElement,
+    public val customDomain: String?,
 
     @SerialName("custom_domain_verified")
     public val customDomainIsVerified: JsonElement,

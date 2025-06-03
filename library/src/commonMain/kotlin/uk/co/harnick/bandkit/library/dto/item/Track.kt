@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class Track private constructor(
+public class Track internal constructor(
     @SerialName("id")
     public val id: Long,
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
 @Serializable
-public class LibraryItem private constructor(
+public class LibraryItem internal constructor(
     @SerialName("fan_id")
     public val ownerId: Long,
 
@@ -62,7 +62,7 @@ public class LibraryItem private constructor(
     public val alsoCollectedByCount: Int,
 
     @SerialName("url_hints")
-    public val urlHints: UrlHints,
+    public val urlHints: LibraryUrlHints,
 
     @SerialName("item_title")
     public val itemTitle: String,

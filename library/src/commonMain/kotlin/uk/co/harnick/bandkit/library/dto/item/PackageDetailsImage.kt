@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class PackageDetailsImage private constructor(
+public class PackageDetailsImage internal constructor(
     @SerialName("image_id")
     public val id: Long,
 

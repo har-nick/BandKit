@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
 @Serializable
-public class PackageDetails private constructor(
+public class PackageDetails internal constructor(
     @SerialName("title")
     public val title: String,
 
@@ -40,7 +40,7 @@ public class PackageDetails private constructor(
     public val artistName: String,
 
     @SerialName("url_hints")
-    public val urlHints: UrlHints,
+    public val urlHints: LibraryUrlHints,
 
     @SerialName("item_url")
     public val itemUrl: String
