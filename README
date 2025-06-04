@@ -22,7 +22,7 @@ Capabilities
 ------------
 BandKit is currently capable of:
     - Fetching user-related data, including profile information, and followed/following accounts
-    - Fetching library data, and exposing stream URLs in MP3-V0 format 
+    - Fetching library data, and exposing stream URLs (MP3 128kb/s)
     - Listing download links for purchased albums in all available codecs
 
 Upcoming features include:
