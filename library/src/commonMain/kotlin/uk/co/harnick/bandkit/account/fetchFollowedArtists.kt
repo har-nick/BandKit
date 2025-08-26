@@ -8,7 +8,7 @@ import uk.co.harnick.bandkit.account.dto.followed.artist.FollowedArtistsResponse
 import uk.co.harnick.bandkit.account.dto.followers.FollowersRequest
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
-import uk.co.harnick.bandkit.core.getApiResponse
+import uk.co.harnick.bandkit.util.fetchApiResponse
 
 public suspend fun BandKit.fetchFollowedArtists(
     userId: Long,
@@ -30,7 +30,7 @@ public suspend fun BandKit.fetchFollowedArtists(
         FollowersRequest(userId, paginationToken, accountLimit)
     )
 
-    return getApiResponse<FollowedArtistsResponse, FollowedArtistError>(
+    return fetchApiResponse<FollowedArtistsResponse, FollowedArtistError>(
         url = url,
         httpMethod = Post,
         body = requestBody

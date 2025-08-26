@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
 //    alias(libs.plugins.dokka)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ktx.serialization)
     alias(libs.plugins.vanniktech.maven.publish)
@@ -17,14 +18,15 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
-    js {
-        browser()
-        nodejs()
-    }
+    androidTarget { publishLibraryVariants("release") }
     jvm()
+    js { browser() }
+    iosX64()
     iosArm64()
+    iosSimulatorArm64()
+    macosArm64()
     linuxX64()
-    mingwX64("windows")
+    mingwX64()
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -37,10 +39,20 @@ kotlin {
             implementation(libs.bundles.ktor)
 
             implementation(libs.kotlinx.datetime)
+            implementation(libs.ksoup)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+    }
+}
+
+android {
+    namespace = "uk.co.harnick.bandkit"
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 14
     }
 }

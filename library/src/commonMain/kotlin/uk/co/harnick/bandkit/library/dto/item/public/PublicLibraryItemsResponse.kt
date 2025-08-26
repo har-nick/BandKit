@@ -1,13 +1,16 @@
-package uk.co.harnick.bandkit.library.dto.item
+package uk.co.harnick.bandkit.library.dto.item.public
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+import uk.co.harnick.bandkit.library.dto.item.Track
+import uk.co.harnick.bandkit.library.dto.item.LookupItem
+import uk.co.harnick.bandkit.library.dto.item.owned.OwnedLibraryItem
 
 @Serializable
-public class LibraryItemsResponse internal constructor(
+public class PublicLibraryItemsResponse internal constructor(
     @SerialName("items")
-    public val libraryItems: List<LibraryItem>,
+    public val libraryItems: List<OwnedLibraryItem>,
 
     @SerialName("more_available")
     public val moreItemsAvailable: Boolean,
@@ -16,10 +19,10 @@ public class LibraryItemsResponse internal constructor(
     public val trackLists: Map<String, List<Track>>,
 
     @SerialName("redownload_urls")
-    public val downloadUrls: Map<String, String>,
+    internal val downloadUrls: Map<String, String>,
 
     @SerialName("item_lookup")
-    public val lookupItems: Map<Long, LookupItem>,
+    internal val lookupItems: Map<Long, LookupItem>,
 
     @SerialName("last_token")
     public val paginationToken: String,
@@ -28,5 +31,5 @@ public class LibraryItemsResponse internal constructor(
     public val purchaseInfos: JsonElement,
 
     @SerialName("collectors")
-    public val collectors: JsonElement,
+    public val collectors: JsonElement
 )

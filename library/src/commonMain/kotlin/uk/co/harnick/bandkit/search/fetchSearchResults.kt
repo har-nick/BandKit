@@ -1,15 +1,5 @@
 package uk.co.harnick.bandkit.search
 
-import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
-import uk.co.harnick.bandkit.core.BandKit
-import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
-import uk.co.harnick.bandkit.core.BandKit.SearchFilter
-import uk.co.harnick.bandkit.core.BandKit.SearchFilter.None
-import uk.co.harnick.bandkit.core.getApiResponse
-import uk.co.harnick.bandkit.search.dto.SearchResultsError
-import uk.co.harnick.bandkit.search.dto.SearchResultsRequest
-
 //public suspend fun BandKit.fetchSearchResults(
 //    searchValue: String,
 //    filter: SearchFilter = None

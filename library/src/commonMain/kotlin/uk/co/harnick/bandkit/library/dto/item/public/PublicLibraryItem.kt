@@ -1,11 +1,15 @@
-package uk.co.harnick.bandkit.library.dto.item
+package uk.co.harnick.bandkit.library.dto.item.public
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+import uk.co.harnick.bandkit.library.dto.item.ArtInfo
+import uk.co.harnick.bandkit.library.dto.item.MerchSnapshot
+import uk.co.harnick.bandkit.library.dto.item.LibraryUrlHints
+import uk.co.harnick.bandkit.library.dto.item.PackageDetails
 
 @Serializable
-public class LibraryItem internal constructor(
+public class PublicLibraryItem internal constructor(
     @SerialName("fan_id")
     public val ownerId: Long,
 
@@ -218,7 +222,7 @@ public class LibraryItem internal constructor(
     public val variantId: JsonElement,
 
     @SerialName("merch_snapshot")
-    public val merchSnapshot: ItemDtoMerchSnapshot?,
+    public val merchSnapshot: MerchSnapshot?,
 
     @SerialName("featured_track_license_id")
     public val featuredTrackLicenseId: JsonElement,

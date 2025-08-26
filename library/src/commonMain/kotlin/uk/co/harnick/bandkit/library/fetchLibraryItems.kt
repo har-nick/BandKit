@@ -5,16 +5,19 @@ import io.ktor.util.date.getTimeMillis
 import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
-import uk.co.harnick.bandkit.core.getApiResponse
+import uk.co.harnick.bandkit.core.BandKitException.MissingTokenException
+import uk.co.harnick.bandkit.util.fetchApiResponse
 import uk.co.harnick.bandkit.library.dto.item.LibraryItemRequest
 import uk.co.harnick.bandkit.library.dto.item.LibraryItemsError
-import uk.co.harnick.bandkit.library.dto.item.LibraryItemsResponse
+import uk.co.harnick.bandkit.library.dto.item.owned.OwnedLibraryItemsResponse
+import uk.co.harnick.bandkit.library.dto.item.public.PublicLibraryItemsResponse
 
-public suspend fun BandKit.fetchLibraryItems(
+private suspend inline fun <reified T> BandKit.fetchLibraryItems(
     userId: Long,
+    token: String?,
     itemLimit: Int = Int.MAX_VALUE,
     upperBoundTimestamp: Long = getTimeMillis()
-): LibraryItemsResponse {
+): T {
     val url = "$BASE_URL/api/fancollection/1/collection_items"
 
     // getTimeMillis is too accurate. We need to truncate to prevent a request error.
@@ -24,9 +27,25 @@ public suspend fun BandKit.fetchLibraryItems(
         LibraryItemRequest(userId, "$trimmedTimestamp::a::", itemLimit)
     )
 
-    return getApiResponse<LibraryItemsResponse, LibraryItemsError>(
+    return fetchApiResponse<T, LibraryItemsError>(
         url = url,
         httpMethod = HttpMethod.Post,
+        token = token,
         body = requestBody
     )
 }
+
+public suspend fun BandKit.fetchOwnedLibraryItems(
+    userId: Long,
+    token: String? = this.decodedToken ?: throw MissingTokenException(),
+    itemLimit: Int = Int.MAX_VALUE,
+    upperBoundTimestamp: Long = getTimeMillis()
+): OwnedLibraryItemsResponse =
+    fetchLibraryItems<OwnedLibraryItemsResponse>(userId, token, itemLimit, upperBoundTimestamp)
+
+public suspend fun BandKit.fetchPublicLibraryItems(
+    userId: Long,
+    itemLimit: Int = Int.MAX_VALUE,
+    upperBoundTimestamp: Long = getTimeMillis()
+): PublicLibraryItemsResponse =
+    fetchLibraryItems<PublicLibraryItemsResponse>(userId, null, itemLimit, upperBoundTimestamp)
