@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-//    alias(libs.plugins.dokka)
+    alias(libs.plugins.dokka)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ktx.serialization)

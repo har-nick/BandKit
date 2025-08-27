@@ -8,6 +8,11 @@ import uk.co.harnick.bandkit.util.fetchApiResponse
 import uk.co.harnick.bandkit.library.dto.summary.LibrarySummaryError
 import uk.co.harnick.bandkit.library.dto.summary.LibrarySummaryResponse
 
+/**
+ * Fetches an account's private library summary.
+ * @param token The token of the summary's owner.
+ * @return An instance of [LibrarySummaryResponse].
+ */
 public suspend fun BandKit.fetchLibrarySummary(
     token: String = this.decodedToken ?: throw MissingTokenException()
 ): LibrarySummaryResponse {

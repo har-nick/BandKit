@@ -10,6 +10,14 @@ import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
 import uk.co.harnick.bandkit.util.fetchApiResponse
 
+/**
+ * Fetches users followed by an account.
+ * @param userId The user ID for the target account.
+ * @param accountLimit The maximum number of followed users to fetch.
+ * @param timestampCursor Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @param userIdCursor A cursor given by the previously fetched results.
+ * @return An instance of [FollowedUsersResponse].
+ */
 public suspend fun BandKit.fetchFollowedUsers(
     userId: Long,
     accountLimit: Int = Int.MAX_VALUE,

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public class FanFeedRequest internal constructor(
     @SerialName("fan_id")
-    public val fanId: Long,
+    public val userId: Long,
 
     @SerialName("older_than")
     public val olderThan: Long

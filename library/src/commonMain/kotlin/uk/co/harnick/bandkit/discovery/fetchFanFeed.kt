@@ -10,8 +10,14 @@ import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedErrorDto
 import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedRequest
 import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedResponse
 
+/**
+ * Fetches a user's feed, including updates from followed artists.
+ * @param userId The user ID for the target account.
+ * @param olderThan The maximum timestamp for feed updates.
+ * @return An instance of [FanFeedResponse].
+ */
 public suspend fun BandKit.fetchFanFeed(
-    fanId: Long,
+    userId: Long,
     olderThan: Long = getTimeMillis()
 ): FanFeedResponse {
     val url = "$BASE_URL/fan_dash_feed_updates"
@@ -20,7 +26,7 @@ public suspend fun BandKit.fetchFanFeed(
     val trimmedTimestamp = "$olderThan".slice(0..11).toLong()
 
     val requestBody = Json.encodeToString(
-        FanFeedRequest(fanId, trimmedTimestamp)
+        FanFeedRequest(userId, trimmedTimestamp)
     )
 
     return fetchApiResponse<FanFeedResponse, FanFeedErrorDto>(url, HttpMethod.Get, requestBody)

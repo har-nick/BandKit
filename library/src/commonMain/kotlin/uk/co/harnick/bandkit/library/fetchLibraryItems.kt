@@ -35,7 +35,15 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
     )
 }
 
-public suspend fun BandKit.fetchOwnedLibraryItems(
+/**
+ * Fetches an account's private library data.
+ * @param userId The library's owner.
+ * @param token The token for the owning account.
+ * @param itemLimit The maximum number of library items to fetch.
+ * @param upperBoundTimestamp Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @return An instance of [OwnedLibraryItemsResponse].
+ */
+public suspend fun BandKit.fetchPrivateLibraryData(
     userId: Long,
     token: String? = this.decodedToken ?: throw MissingTokenException(),
     itemLimit: Int = Int.MAX_VALUE,
@@ -43,6 +51,13 @@ public suspend fun BandKit.fetchOwnedLibraryItems(
 ): OwnedLibraryItemsResponse =
     fetchLibraryItems<OwnedLibraryItemsResponse>(userId, token, itemLimit, upperBoundTimestamp)
 
+/**
+ * Fetches an account's public library data.
+ * @param userId The library's owner.
+ * @param itemLimit The maximum number of library items to fetch.
+ * @param upperBoundTimestamp Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @return An instance of [OwnedLibraryItemsResponse].
+ */
 public suspend fun BandKit.fetchPublicLibraryItems(
     userId: Long,
     itemLimit: Int = Int.MAX_VALUE,
