@@ -16,7 +16,9 @@ This includes, but is not limited to:
     - Native (Mobile)
         > Android NDK
         > iOS / tvOS / watchOS
-    - Web (npm)
+    - Web
+        > npm
+        > WASM
 
 Capabilities
 ------------
