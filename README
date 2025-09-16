@@ -54,7 +54,7 @@ For further pointers, search for comments with "NOTE".
 
 Documentation
 -------------
-Dokka integration is planned and upcoming.
+BandKit uses Dokka for documentation. Documentation itself is a work-in-progress.
 
 Contribution
 ------------
