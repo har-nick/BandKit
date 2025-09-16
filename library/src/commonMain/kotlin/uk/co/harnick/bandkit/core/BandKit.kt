@@ -10,15 +10,14 @@ import uk.co.harnick.bandkit.core.BandKitException.MissingPluginException
 
 /**
  *  The main instance for accessing BandKit's functions.
- *  @param token The Bandcamp account token required for non-public requests.
+ *  @param token The Bandcamp account token required for requests to private endpoints.
  *  @param config Configuration for BandKit's behavior.
  *  @param client The Ktor client used for requests.
  */
-
 public class BandKit(
     token: String?,
     internal val config: Config = Config(),
-    internal val client: HttpClient = createDefaultClient()
+    internal val client: HttpClient = defaultClient
 ) : Closeable {
     init {
         client.pluginOrNull(ContentNegotiation) ?: throw MissingPluginException(

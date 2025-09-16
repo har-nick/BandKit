@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class SearchResultsRequest internal constructor(
+internal class SearchResultsRequest internal constructor(
     @SerialName("search_text")
     val searchText: String,
 

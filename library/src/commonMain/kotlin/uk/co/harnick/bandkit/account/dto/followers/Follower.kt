@@ -3,6 +3,19 @@ package uk.co.harnick.bandkit.account.dto.followers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * An instance of a following user.
+ * @property userId The user's ID.
+ * @property artistId The user's artist ID, if one exists.
+ * @property fanUrl Always null.
+ * @property avatarId The user's avatar ID, if one exists.
+ * @property url The user's Bandcamp URL.
+ * @property displayName The user's display name.
+ * @property isMutual true if the followed user also follows the target account.
+ * @property location The user's location.
+ * @property dateFollowed The date the target account followed the user in RFC 1123 format.
+ * @property paginationToken The last token for the followed account, in the format [dateFollowed]:[userId], with [dateFollowed] being a unix timestamp.
+ */
 @Serializable
 public class Follower internal constructor(
     @SerialName("fan_id")
@@ -20,13 +33,13 @@ public class Follower internal constructor(
     public val avatarId: Long?,
 
     @SerialName("trackpipe_url")
-    public val userUrl: String,
+    public val url: String,
 
     @SerialName("name")
     public val displayName: String?,
 
     @SerialName("is_following")
-    public val userIsFollowing: Boolean,
+    public val isMutual: Boolean,
 
     @SerialName("location")
     public val location: String?,
@@ -34,7 +47,6 @@ public class Follower internal constructor(
     @SerialName("date_followed")
     public val dateFollowed: String,
 
-    // NOTE:    Structure => (timestamp of request):(`fan_id`)
     @SerialName("token")
-    public val token: String
+    public val paginationToken: String
 )

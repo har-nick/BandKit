@@ -1,5 +1,6 @@
 package uk.co.harnick.bandkit.library
 
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod.Companion.Get
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
@@ -21,6 +22,7 @@ public suspend fun BandKit.fetchLibrarySummary(
     return fetchApiResponse<LibrarySummaryResponse, LibrarySummaryError>(
         url = url,
         httpMethod = Get,
+        contentType = ContentType.Application.Json,
         token = token
     )
 }

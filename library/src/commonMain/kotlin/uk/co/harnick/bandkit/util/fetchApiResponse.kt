@@ -5,7 +5,6 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.accept
 import io.ktor.client.request.cookie
 import io.ktor.client.request.request
-import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
@@ -19,13 +18,13 @@ import uk.co.harnick.bandkit.core.dto.ApiError
 internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fetchApiResponse(
     url: String,
     httpMethod: HttpMethod,
+    contentType: ContentType,
     token: String? = null,
-    body: String? = null,
     config: HttpRequestBuilder.() -> Unit = {}
 ): Data {
     val response = client.request {
         url(url)
-        contentType(ContentType.Application.Json)
+        contentType(contentType)
         userAgent(this@fetchApiResponse.config.userAgent)
         accept(ContentType.Any)
         method = httpMethod
@@ -38,7 +37,6 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
             httpOnly = true
         )
 
-        if (body != null) setBody(body)
         config()
     }
 

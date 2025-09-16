@@ -1,11 +1,14 @@
 [versions]
 dokka = "2.0.0"
 jdk = "21"
+kotest = "6.0.1"
 kotlin = "2.2.10"
 ktor = "3.2.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+kotest-framework = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
 
@@ -16,9 +19,11 @@ ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", 
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version = "0.2.5" }
 
 [plugins]
-android-library = { id = "com.android.library", version = "8.12.1" }
+android-library = { id = "com.android.library", version = "8.12.2" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotest = { id = "io.kotest", version.ref = "kotest" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
 ktx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
 

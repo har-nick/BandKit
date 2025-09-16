@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import uk.co.harnick.bandkit.core.dto.ApiError
 
 @Serializable
-internal data class SearchResultsError internal constructor(
+internal class SearchResultsError internal constructor(
     @SerialName("__api_special__")
     val apiSpecial: String,
 

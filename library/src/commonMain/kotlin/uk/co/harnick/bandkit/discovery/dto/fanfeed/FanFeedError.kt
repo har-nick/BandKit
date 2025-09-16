@@ -9,17 +9,17 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import uk.co.harnick.bandkit.core.dto.ApiError
 
-internal object FanFeedErrorSerializer : KSerializer<FanFeedErrorDto> {
+internal object FanFeedErrorSerializer : KSerializer<FanFeedError> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("FanFeedErrorDto", STRING)
 
-    override fun deserialize(decoder: Decoder): FanFeedErrorDto =
-        FanFeedErrorDto(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): FanFeedError =
+        FanFeedError(decoder.decodeString())
 
-    override fun serialize(encoder: Encoder, value: FanFeedErrorDto) =
+    override fun serialize(encoder: Encoder, value: FanFeedError) =
         encoder.encodeString(value.value)
 }
 
 @Serializable(with = FanFeedErrorSerializer::class)
-internal data class FanFeedErrorDto internal constructor(val value: String) : ApiError {
+internal class FanFeedError internal constructor(val value: String) : ApiError {
     override val message: String = "An unidentified error occurred when fetching fan feed."
 }

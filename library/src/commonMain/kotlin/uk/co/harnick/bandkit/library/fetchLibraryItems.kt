@@ -1,5 +1,7 @@
 package uk.co.harnick.bandkit.library
 
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.util.date.getTimeMillis
 import kotlinx.serialization.json.Json
@@ -21,7 +23,7 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
     val url = "$BASE_URL/api/fancollection/1/collection_items"
 
     // getTimeMillis is too accurate. We need to truncate to prevent a request error.
-    val trimmedTimestamp = "$upperBoundTimestamp".slice(0..11)
+    val trimmedTimestamp = "$upperBoundTimestamp".take(12)
 
     val requestBody = Json.encodeToString(
         LibraryItemRequest(userId, "$trimmedTimestamp::a::", itemLimit)
@@ -31,7 +33,8 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
         url = url,
         httpMethod = HttpMethod.Post,
         token = token,
-        body = requestBody
+        contentType = ContentType.Application.Json,
+        config = { setBody(requestBody) }
     )
 }
 

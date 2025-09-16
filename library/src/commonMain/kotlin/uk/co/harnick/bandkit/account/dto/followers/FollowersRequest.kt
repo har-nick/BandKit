@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class FollowersRequest(
+internal class FollowersRequest(
     @SerialName("fan_id")
     internal val userId: Long,
 

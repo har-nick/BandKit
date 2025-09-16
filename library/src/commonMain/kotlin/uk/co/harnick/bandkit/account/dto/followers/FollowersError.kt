@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import uk.co.harnick.bandkit.core.dto.ApiError
 
 @Serializable
-internal data class FollowersError internal constructor(
+internal class FollowersError internal constructor(
     @SerialName("error")
     val error: Boolean,
     @SerialName("error_message")

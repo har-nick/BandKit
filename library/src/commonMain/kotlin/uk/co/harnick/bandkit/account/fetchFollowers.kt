@@ -1,6 +1,8 @@
 package uk.co.harnick.bandkit.account
 
-import io.ktor.http.HttpMethod
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.util.date.getTimeMillis
 import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.account.dto.followers.FollowersError
@@ -27,7 +29,7 @@ public suspend fun BandKit.fetchFollowers(
     val url = "$BASE_URL/api/fancollection/1/followers"
 
     // getTimeMillis is too accurate. We need to truncate to prevent a request error.
-    val trimmedTimestamp = "$timestampCursor".slice(0..11).toLong()
+    val trimmedTimestamp = "$timestampCursor".take(12).toLong()
 
     val paginationToken = buildString {
         append(trimmedTimestamp)
@@ -40,7 +42,8 @@ public suspend fun BandKit.fetchFollowers(
 
     return fetchApiResponse<FollowersResponse, FollowersError>(
         url = url,
-        httpMethod = HttpMethod.Post,
-        body = requestBody
+        httpMethod = Post,
+        contentType = ContentType.Application.Json,
+        config = { setBody(requestBody) }
     )
 }

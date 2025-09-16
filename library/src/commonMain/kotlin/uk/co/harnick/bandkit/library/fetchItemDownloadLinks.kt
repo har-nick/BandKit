@@ -18,43 +18,27 @@ import uk.co.harnick.bandkit.library.dto.download.DownloadOption
 /**
  * Fetches all available download links for a library item.
  * @param token The token of the item's owner.
- * @param itemId The item's ID.
- * @param signature The signature for the item.
- * @param saleId The item's sale/purchase ID.
- * @return A Map of download links, or null if one was not found.
+ * @param downloadGatewayUrl The gateway URL to download a library item.
+ * @see [uk.co.harnick.bandkit.library.dto.item.owned.OwnedLibraryItemsResponse.downloadUrls]
+ * @return A Map of download links, or null if none were found.
  */
 public suspend fun BandKit.fetchItemDownloadLinks(
-    token: String = this.decodedToken ?: throw MissingTokenException(),
-    itemId: Long,
-    signature: String,
-    saleId: Long
+    downloadGatewayUrl: String,
+    token: String = this.decodedToken ?: throw MissingTokenException()
 ): Map<Encoding, String?> {
-    val baseDownloadUrl = "https://popplers5.bandcamp.com/download/album"
-
-    val requestUrl = buildString {
-        append(baseDownloadUrl)
-
-        // An encoding is necessary for the URL, even if one isn't desired in particular.
-        append("?enc=${Encoding.FLAC.apiRef}")
-
-        append("&id=$itemId")
-        append("&sig=$signature")
-        append("&sitem_id=$saleId")
-    }
-
-    val response = client.get(requestUrl) {
+    val gatewayResponse = client.get(downloadGatewayUrl) {
         userAgent(config.userAgent)
         accept(ContentType.Any)
         cookie("identity", token)
     }
 
-    if (!response.status.isSuccess()) {
-        throw ApiException("Failed to fetch download page: ${response.status}.")
+    if (!gatewayResponse.status.isSuccess()) {
+        throw ApiException("Failed to fetch download page: ${gatewayResponse.status}.")
     }
 
-    val rawData = response.bodyAsText()
+    val rawData = gatewayResponse.bodyAsText()
         .substringAfter(delimiter = "downloads&quot;:", missingDelimiterValue = "")
-        .substringBefore(delimiter = "},&quot;ready", missingDelimiterValue = "")
+        .substringBefore(delimiter = ",&quot;ready", missingDelimiterValue = "")
         .ifBlank { throw ApiException("Failed to locate download links in response.") }
 
     val escapedData = Parser.unescapeEntities(rawData, inAttribute = false)
