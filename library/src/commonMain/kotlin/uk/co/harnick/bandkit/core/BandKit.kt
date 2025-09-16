@@ -54,12 +54,12 @@ public class BandKit(
 
     /**
      *  The configuration for BandKit's behaviour.
-     *  @property userAgent The client user-agent used for requests.
+     *  @param userAgent The client user-agent used for requests.
      */
-    public class Config {
+    public class Config(
         public var userAgent: String =
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
-    }
+    )
 
     /**
      * Sane defaults for image asset dimensions.
