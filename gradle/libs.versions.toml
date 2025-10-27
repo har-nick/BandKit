@@ -1,8 +1,8 @@
 [versions]
 jdk = "21"
-kotest = "6.0.3"
+kotest = "6.0.4"
 kotlin = "2.2.10"
-ktor = "3.3.0"
+ktor = "3.3.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -12,6 +12,7 @@ kotest-framework = { module = "io.kotest:kotest-framework-engine", version.ref =
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
@@ -19,7 +20,7 @@ ksoup = { module = "com.fleeksoft.ksoup:ksoup", version = "0.2.5" }
 
 [plugins]
 android-library = { id = "com.android.library", version = "8.13.0" }
-dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
+dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
 kotest = { id = "io.kotest", version.ref = "kotest" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
@@ -27,4 +28,9 @@ ktx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.
 vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
 
 [bundles]
-ktor = ["ktor-client-core", "ktor-content-negotiation", "ktor-serialization-json"]
+ktor = [
+    "ktor-client-core",
+    "ktor-client-encoding",
+    "ktor-content-negotiation",
+    "ktor-serialization-json"
+]
