@@ -7,13 +7,13 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.isSuccess
-import io.ktor.http.userAgent
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Encoding
 import uk.co.harnick.bandkit.core.BandKitException.*
 import uk.co.harnick.bandkit.library.dto.download.DownloadOption
+import uk.co.harnick.bandkit.util.setDefaultHeaders
 
 /**
  * Fetches all available download links for a library item.
@@ -27,8 +27,8 @@ public suspend fun BandKit.fetchItemDownloadLinks(
     token: String = this.decodedToken ?: throw MissingTokenException()
 ): Map<Encoding, String?> {
     val gatewayResponse = client.get(downloadGatewayUrl) {
-        userAgent(config.userAgent)
-        accept(ContentType.Any)
+        setDefaultHeaders(this)
+        accept(ContentType.parse("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"))
         cookie("identity", token)
     }
 

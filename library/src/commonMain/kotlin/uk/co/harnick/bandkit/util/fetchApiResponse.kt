@@ -9,7 +9,6 @@ import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
-import io.ktor.http.userAgent
 import io.ktor.serialization.ContentConvertException
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKitException.ApiException
@@ -24,10 +23,11 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
 ): Data {
     val response = client.request {
         url(url)
-        contentType(contentType)
-        userAgent(this@fetchApiResponse.config.userAgent)
-        accept(ContentType.Any)
         method = httpMethod
+
+        setDefaultHeaders(this)
+        contentType(contentType)
+        accept(ContentType.Any)
 
         if (token != null) cookie(
             name = "identity",
