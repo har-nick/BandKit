@@ -1,7 +1,10 @@
 package uk.co.harnick.bandkit.core
 
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.cookies.AcceptAllCookiesStorage
+import io.ktor.client.plugins.cookies.HttpCookies
 import io.ktor.client.plugins.pluginOrNull
 import io.ktor.http.decodeURLQueryComponent
 import io.ktor.serialization.kotlinx.json.json
@@ -16,8 +19,8 @@ import uk.co.harnick.bandkit.core.BandKitException.MissingPluginException
  */
 public class BandKit(
     token: String?,
-    internal val config: Config = Config(),
-    internal val client: HttpClient = defaultClient
+    public val client: HttpClient = defaultClient,
+    internal val config: Config = Config()
 ) : Closeable {
     init {
         client.pluginOrNull(ContentNegotiation) ?: throw MissingPluginException(
@@ -46,8 +49,17 @@ public class BandKit(
         private val defaultClient: HttpClient = createDefaultClient()
 
         private fun createDefaultClient(): HttpClient = HttpClient {
+            install(ContentEncoding) {
+                deflate()
+                gzip()
+            }
+
             install(ContentNegotiation) {
                 json()
+            }
+
+            install(HttpCookies) {
+                storage = AcceptAllCookiesStorage()
             }
         }
     }
@@ -79,16 +91,17 @@ public class BandKit(
      * @param apiRef The integer used when forming URLs for requests.
      */
     public enum class Encoding(
-        public val apiRef: String
+        public val apiRef: String,
+        public val extension: String
     ) {
-        AAC("aac-hi"),
-        AIFF("aiff-lossless"),
-        ALAC("alac"),
-        FLAC("flac"),
-        MP3_320("mp3-320"),
-        MP3_V0("mp3-v0"),
-        OGG("vorbis"),
-        WAV("wav")
+        AAC("aac-hi", "m4a"),
+        AIFF("aiff-lossless", "aiff"),
+        ALAC("alac", "m4a"),
+        FLAC("flac", "flac"),
+        MP3_320("mp3-320", "mp3"),
+        MP3_V0("mp3-v0", "mp3"),
+        OGG("vorbis", "ogg"),
+        WAV("wav", "wav")
     }
 
     /**
