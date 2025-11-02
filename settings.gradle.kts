@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "bandkit"
 include(":library")
-project(":library").name = "bandkit"
