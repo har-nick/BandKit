@@ -15,17 +15,17 @@ import uk.co.harnick.bandkit.discovery.util.urlEncode
 /**
  * Fetches a user's feed, including updates from followed artists.
  * @param userId The user ID for the target account.
- * @param olderThan The upper bound for feed timestamps in seconds.
+ * @param timestampCursor The upper bound for feed timestamps in seconds.
  * @return An instance of [FanFeedResponse].
  */
 private suspend fun BandKit.fetchFanFeed(
     userId: Long,
-    olderThan: Long = getTimeMillis() / 1000
+    timestampCursor: Long = getTimeMillis() / 1000
 ): FanFeedResponse {
     val url = "$BASE_URL/fan_dash_feed_updates"
 
     val requestBody = urlEncode(
-        FanFeedRequest(userId, olderThan)
+        FanFeedRequest(userId, timestampCursor)
     )
 
     return fetchApiResponse<FanFeedResponse, FanFeedError>(
