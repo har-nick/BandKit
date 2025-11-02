@@ -48,7 +48,7 @@ Building KMP libraries via JitPack isn't supported, so publishing there is unpla
 Usage
 ------
 For detailed usage instructions, see this repository's wiki:
-    https://github.com/har-nick/BandKit/wiki/Usage
+    https://github.com/har-nick/BandKit/wiki
 
 For further pointers, search for comments with "NOTE".
 
