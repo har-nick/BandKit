@@ -16,23 +16,20 @@ import uk.co.harnick.bandkit.util.fetchApiResponse
  * Fetches users followed by an account.
  * @param userId The user ID for the target account.
  * @param accountLimit The maximum number of followed users to fetch.
- * @param timestampCursor Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @param timestampCursor The upper bound for the timestamp of each instance of a follow event in seconds.
  * @param userIdCursor A cursor given by the previously fetched results.
  * @return An instance of [FollowedUsersResponse].
  */
 public suspend fun BandKit.fetchFollowedUsers(
     userId: Long,
     accountLimit: Int = Int.MAX_VALUE,
-    timestampCursor: Long = getTimeMillis(),
+    timestampCursor: Long = getTimeMillis() / 1000,
     userIdCursor: Long? = null
 ): FollowedUsersResponse {
     val url = "$BASE_URL/api/fancollection/1/following_fans"
 
-    // getTimeMillis is too accurate. We need to truncate to prevent a request error.
-    val trimmedTimestamp = "$timestampCursor".take(12).toLong()
-
     val paginationToken = buildString {
-        append(trimmedTimestamp)
+        append(timestampCursor)
         append(userIdCursor ?: "::a::")
     }
 

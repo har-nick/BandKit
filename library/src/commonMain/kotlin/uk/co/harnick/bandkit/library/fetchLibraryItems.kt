@@ -18,15 +18,12 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
     userId: Long,
     token: String?,
     itemLimit: Int = Int.MAX_VALUE,
-    upperBoundTimestamp: Long = getTimeMillis()
+    timestampCursor: Long = getTimeMillis() / 1000
 ): T {
     val url = "$BASE_URL/api/fancollection/1/collection_items"
 
-    // getTimeMillis is too accurate. We need to truncate to prevent a request error.
-    val trimmedTimestamp = "$upperBoundTimestamp".take(12)
-
     val requestBody = Json.encodeToString(
-        LibraryItemRequest(userId, "$trimmedTimestamp::a::", itemLimit)
+        LibraryItemRequest(userId, "$timestampCursor::a::", itemLimit)
     )
 
     return fetchApiResponse<T, LibraryItemsError>(
@@ -43,27 +40,27 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
  * @param userId The library's owner.
  * @param token The token for the owning account.
  * @param itemLimit The maximum number of library items to fetch.
- * @param upperBoundTimestamp Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @param timestampCursor The upper bound for the timestamp of each purchased item.
  * @return An instance of [OwnedLibraryItemsResponse].
  */
 public suspend fun BandKit.fetchPrivateLibraryData(
     userId: Long,
     token: String? = this.decodedToken ?: throw MissingTokenException(),
     itemLimit: Int = Int.MAX_VALUE,
-    upperBoundTimestamp: Long = getTimeMillis()
+    timestampCursor: Long = getTimeMillis() / 1000
 ): OwnedLibraryItemsResponse =
-    fetchLibraryItems<OwnedLibraryItemsResponse>(userId, token, itemLimit, upperBoundTimestamp)
+    fetchLibraryItems<OwnedLibraryItemsResponse>(userId, token, itemLimit, timestampCursor)
 
 /**
  * Fetches an account's public library data.
  * @param userId The library's owner.
  * @param itemLimit The maximum number of library items to fetch.
- * @param upperBoundTimestamp Unsure of this purpose. TO BE DOCUMENTED FURTHER.
+ * @param timestampCursor Unsure of this purpose. TO BE DOCUMENTED FURTHER.
  * @return An instance of [OwnedLibraryItemsResponse].
  */
 public suspend fun BandKit.fetchPublicLibraryItems(
     userId: Long,
     itemLimit: Int = Int.MAX_VALUE,
-    upperBoundTimestamp: Long = getTimeMillis()
+    timestampCursor: Long = getTimeMillis() / 1000
 ): PublicLibraryItemsResponse =
-    fetchLibraryItems<PublicLibraryItemsResponse>(userId, null, itemLimit, upperBoundTimestamp)
+    fetchLibraryItems<PublicLibraryItemsResponse>(userId, null, itemLimit, timestampCursor)
