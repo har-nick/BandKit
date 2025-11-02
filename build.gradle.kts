@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.ktx.serialization) apply false
     alias(libs.plugins.vanniktech.maven.publish) apply false
+    alias(libs.plugins.spotless) apply false
 }

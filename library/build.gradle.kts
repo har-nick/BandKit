@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktx.serialization)
     alias(libs.plugins.vanniktech.maven.publish)
+    alias(libs.plugins.spotless)
 }
 
 group = "uk.co.harnick"
@@ -57,5 +58,11 @@ android {
 
     defaultConfig {
         minSdk = 14
+    }
+}
+
+spotless {
+    kotlin {
+        ktfmt().googleStyle()
     }
 }
