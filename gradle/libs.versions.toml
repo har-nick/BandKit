@@ -1,7 +1,7 @@
 [versions]
 jdk = "21"
 kotest = "6.0.4"
-kotlin = "2.2.10"
+kotlin = "2.2.21"
 ktor = "3.3.1"
 
 [libraries]
@@ -23,7 +23,7 @@ android-library = { id = "com.android.library", version = "8.13.0" }
 dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
 kotest = { id = "io.kotest", version.ref = "kotest" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
+ksp = { id = "com.google.devtools.ksp", version = "2.3.0" }
 ktx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
 vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
