@@ -23,7 +23,6 @@ kotlin {
 
     androidTarget { publishLibraryVariants("release") }
     jvm()
-    js { browser() }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -35,6 +34,13 @@ kotlin {
     wasmJs {
         browser()
         binaries.executable()
+        generateTypeScriptDefinitions()
+    }
+
+    js {
+        browser()
+        binaries.executable()
+        generateTypeScriptDefinitions()
     }
 
     sourceSets {
