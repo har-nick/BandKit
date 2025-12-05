@@ -23,13 +23,17 @@ public class BandKit(
     internal val config: Config = Config()
 ) : Closeable {
     init {
+        client.pluginOrNull(ContentEncoding) ?: throw MissingPluginException(
+            "ContentEncoding plugin has not been installed to the passed HttpClient."
+        )
+
         client.pluginOrNull(ContentNegotiation) ?: throw MissingPluginException(
             "ContentNegotiation plugin has not been installed to the passed HttpClient."
         )
     }
 
     /** Closes all client connections if no custom client is passed. */
-    override fun close() {
+    public override fun close() {
         if (client === defaultClient) client.close()
     }
 
@@ -46,6 +50,7 @@ public class BandKit(
         /** Bandcamp's image asset URL */
         public const val IMAGE_URL: String = "https://f4.bcbits.com/img"
 
+        /** The default client used for BandKit's requests */
         private val defaultClient: HttpClient = createDefaultClient()
 
         private fun createDefaultClient(): HttpClient = HttpClient {
