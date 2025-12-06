@@ -5,9 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public class DownloadOption internal constructor(
-    @SerialName("size_mb")
-    public val size: String,
-
     @SerialName("description")
     public val description: String,
 
@@ -15,5 +12,8 @@ public class DownloadOption internal constructor(
     public val encoding: String,
 
     @SerialName("url")
-    public val url: String
+    public val url: String,
+
+    @SerialName("size_mb")
+    public val size: String?
 )
