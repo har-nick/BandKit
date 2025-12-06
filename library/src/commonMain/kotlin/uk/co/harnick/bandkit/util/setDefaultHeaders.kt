@@ -10,7 +10,7 @@ import io.ktor.http.header.AcceptEncoding.Companion.Gzip
 import io.ktor.http.userAgent
 import uk.co.harnick.bandkit.core.BandKit
 
-public fun BandKit.setDefaultHeaders(builder: HttpMessageBuilder) {
+internal fun BandKit.setDefaultHeaders(builder: HttpMessageBuilder) {
     with(builder) {
         userAgent(config.userAgent)
 
