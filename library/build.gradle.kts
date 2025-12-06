@@ -73,3 +73,11 @@ spotless {
         ktfmt().googleStyle()
     }
 }
+
+mavenPublishing {
+    coordinates(
+        groupId = "uk.co.harnick",
+        artifactId = "bandkit",
+        version = version.toString()
+    )
+}
