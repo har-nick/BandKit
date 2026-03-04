@@ -1,10 +1,10 @@
 package uk.co.harnick.bandkit.library
 
 import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
+import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpMethod
 import io.ktor.util.date.getTimeMillis
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json as JsonSerializer
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
 import uk.co.harnick.bandkit.core.BandKitException.MissingTokenException
@@ -22,7 +22,7 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
 ): T {
     val url = "$BASE_URL/api/fancollection/1/collection_items"
 
-    val requestBody = Json.encodeToString(
+    val requestBody = JsonSerializer.encodeToString(
         LibraryItemRequest(userId, "$timestampCursor::a::", itemLimit)
     )
 
@@ -30,7 +30,7 @@ private suspend inline fun <reified T> BandKit.fetchLibraryItems(
         url = url,
         httpMethod = HttpMethod.Post,
         token = token,
-        contentType = ContentType.Application.Json,
+        contentType = Json,
         config = { setBody(requestBody) }
     )
 }

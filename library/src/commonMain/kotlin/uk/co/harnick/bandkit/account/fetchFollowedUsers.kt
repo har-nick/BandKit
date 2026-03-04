@@ -1,10 +1,10 @@
 package uk.co.harnick.bandkit.account
 
 import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
+import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.util.date.getTimeMillis
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json as JsonSerializer
 import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUserError
 import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUserRequest
 import uk.co.harnick.bandkit.account.dto.followed.user.FollowedUsersResponse
@@ -33,14 +33,14 @@ public suspend fun BandKit.fetchFollowedUsers(
         append(userIdCursor ?: "::a::")
     }
 
-    val requestBody = Json.encodeToString(
+    val requestBody = JsonSerializer.encodeToString(
         FollowedUserRequest(userId, accountLimit, paginationToken)
     )
 
     return fetchApiResponse<FollowedUsersResponse, FollowedUserError>(
         url = url,
         httpMethod = Post,
-        contentType = ContentType.Application.Json,
+        contentType = Json,
         config = { setBody(requestBody) }
     )
 }

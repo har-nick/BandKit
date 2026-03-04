@@ -1,0 +1,11 @@
+comments:
+  UndocumentedPublicClass:
+    active: true
+    searchInInnerClass: true
+    searchInNestedClass: true
+
+  UndocumentedPublicFunction:
+    active: true
+
+  UndocumentedPublicProperty:
+    active: true

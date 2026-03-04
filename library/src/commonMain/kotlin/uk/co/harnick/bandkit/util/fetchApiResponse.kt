@@ -6,10 +6,13 @@ import io.ktor.client.request.accept
 import io.ktor.client.request.cookie
 import io.ktor.client.request.request
 import io.ktor.client.request.url
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
 import io.ktor.serialization.ContentConvertException
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKitException.ApiException
 import uk.co.harnick.bandkit.core.dto.ApiError
@@ -19,7 +22,8 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
     httpMethod: HttpMethod,
     contentType: ContentType,
     token: String? = null,
-    config: HttpRequestBuilder.() -> Unit = {}
+    config: HttpRequestBuilder.() -> Unit = {},
+    deserializer: DeserializationStrategy<Data>? = null,
 ): Data {
     val response = client.request {
         url(url)
@@ -42,7 +46,9 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
 
     // API errors are returned with a 200 (OK) status code, so we need naively to deserialize and catch
     return try {
-        response.body<Data>()
+        deserializer
+            ?.let { Json.decodeFromString(deserializer, response.bodyAsText()) }
+            ?: response.body<Data>()
     } catch (e: ContentConvertException) {
         val apiError = response.body<Error>()
         throw ApiException(apiError.message)
