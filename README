@@ -27,14 +27,13 @@ BandKit is currently capable of:
     - Fetching library data, and exposing stream URLs (MP3 128kb/s)
     - Listing download links for purchased albums in all available codecs
     - Searching functionality, with filters for Albums, Bands, and Tracks
+    - Fetching various homepage data, including Album of the Day, New and Notable, and the dynamic Sales Feed
 
 Upcoming features include:
-    - Getting artist data, such as discography and location
+    - Better pagination handling
 
 Potential upcoming features include:
     - Bandcamp Radio support
-    - Pagination handling
-    - Optional local/persistant caching of aggregated data
     - Recommendations based on genre and location
 
 Downloading
