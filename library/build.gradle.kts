@@ -30,6 +30,19 @@ kotlin {
     linuxX64()
     mingwX64()
 
+    js() {
+        browser()
+        nodejs()
+        binaries.library()
+        generateTypeScriptDefinitions()
+
+        compilations["main"].packageJson {
+            name = "bandkit"
+            version = "1.0.0"
+            main = "kotlin/bandkit.js"
+        }
+    }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
