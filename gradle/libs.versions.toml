@@ -1,6 +1,6 @@
 [versions]
 jdk = "21"
-kotest = "6.1.4"
+kotest = "6.1.6"
 kotlin = "2.3.10"
 ktor = "3.4.1"
 
