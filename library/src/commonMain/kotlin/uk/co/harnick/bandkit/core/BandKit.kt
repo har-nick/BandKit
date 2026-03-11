@@ -1,6 +1,7 @@
 package uk.co.harnick.bandkit.core
 
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.cookies.AcceptAllCookiesStorage
@@ -54,6 +55,10 @@ public class BandKit(
         private val defaultClient: HttpClient = createDefaultClient()
 
         private fun createDefaultClient(): HttpClient = HttpClient {
+            install(HttpTimeout) {
+                requestTimeoutMillis = 30000
+            }
+
             install(ContentEncoding) {
                 deflate()
                 gzip()
