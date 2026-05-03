@@ -6,13 +6,10 @@ import io.ktor.client.request.accept
 import io.ktor.client.request.cookie
 import io.ktor.client.request.request
 import io.ktor.client.request.url
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
 import io.ktor.serialization.ContentConvertException
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.json.Json
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKitException.ApiException
 import uk.co.harnick.bandkit.core.dto.ApiError
@@ -22,8 +19,7 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
     httpMethod: HttpMethod,
     contentType: ContentType,
     token: String? = null,
-    config: HttpRequestBuilder.() -> Unit = {},
-    deserializer: DeserializationStrategy<Data>? = null,
+    config: HttpRequestBuilder.() -> Unit = {}
 ): Data {
     val response = client.request {
         url(url)
@@ -44,13 +40,14 @@ internal suspend inline fun <reified Data, reified Error : ApiError> BandKit.fet
         config()
     }
 
-    // API errors are returned with a 200 (OK) status code, so we need naively to deserialize and catch
+    // Non-server errors are returned with a 200 (OK) status code, so we need naively to deserialize and catch.
     return try {
-        deserializer
-            ?.let { Json.decodeFromString(deserializer, response.bodyAsText()) }
-            ?: response.body<Data>()
+        response.body<Data>()
     } catch (e: ContentConvertException) {
+        // Non-server errors (which are usually "bad request" responses) contain useless but thankfully static info.
+        // This assumes the serializer for reified type Error is correct.
         val apiError = response.body<Error>()
         throw ApiException(apiError.message)
     }
+    // If the content fails to convert again, or some other error appears, we throw it up the chain.
 }
