@@ -7,11 +7,11 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktx.serialization)
-    alias(libs.plugins.vanniktech.maven.publish)
     alias(libs.plugins.spotless)
+    `maven-publish`
 }
 
-group = "uk.co.harnick"
+group = "uk.co.harnick.bandkit"
 version = "1.0.0"
 
 kotlin {
@@ -21,7 +21,10 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
-    androidTarget { publishLibraryVariants("release") }
+    androidTarget {
+        publishLibraryVariants("release")
+    }
+
     jvm()
     iosX64()
     iosArm64()
@@ -30,7 +33,7 @@ kotlin {
     linuxX64()
     mingwX64()
 
-    js() {
+    js {
         browser()
         nodejs()
         binaries.library()
@@ -87,10 +90,20 @@ spotless {
     }
 }
 
-mavenPublishing {
-    coordinates(
-        groupId = "uk.co.harnick",
-        artifactId = "bandkit",
-        version = version.toString()
-    )
-}
+// For some unknown eldritch reason, I keep getting a 401 HTTP error when uploading to GitHub packages.
+// The only solution I've found was hardcoding my API keys. Any reference causes it.
+// Code for reference:
+// publishing {
+//    repositories {
+//        maven {
+//            name = "GithubPackages"
+//            url = uri("https://maven.pkg.github.com/har-nick/bandkit")
+//
+//            credentials {
+//                username = ""
+//                password = ""
+//            }
+//        }
+//    }
+//}
+apply(from = "publish.gradle.kts")
