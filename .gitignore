@@ -13,3 +13,4 @@ xcuserdata
 *.gpg
 /kotlin-js-store/yarn.lock
 /library/publish.gradle.kts
+/library/repositories.gradle.kts

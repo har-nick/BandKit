@@ -91,13 +91,13 @@ spotless {
 }
 
 // For some unknown eldritch reason, I keep getting a 401 HTTP error when uploading to GitHub packages.
-// The only solution I've found was hardcoding my API keys. Any reference causes it.
+// The only solution I've found was hardcoding my API keys. Any deferred reference causes it.
 // Code for reference:
-// publishing {
+//extensions.configure<PublishingExtension> {
 //    repositories {
 //        maven {
 //            name = "GithubPackages"
-//            url = uri("https://maven.pkg.github.com/har-nick/bandkit")
+//            url = uri("")
 //
 //            credentials {
 //                username = ""
@@ -106,4 +106,32 @@ spotless {
 //        }
 //    }
 //}
-apply(from = "publish.gradle.kts")
+apply(from = "repositories.gradle.kts")
+
+publishing {
+    publications {
+        withType<MavenPublication>().configureEach {
+            groupId = "$group"
+            version = "$version"
+
+            pom {
+                name = "BandKit"
+                description = "A Kotlin Multiplatform library to interface with Bandcamp's API."
+                url = "https://github.com/har-nick/bandkit"
+
+                licenses {
+                    license {
+                        name = "Apache-2.0"
+                        url = "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/har-nick/bandkit.git" 
+                    developerConnection = "scm:git:ssh://github.com/har-nick/bandkit.git" 
+                    url = "https://github.com/example/my-bandkit" 
+                }
+            }
+        }
+    }
+}
