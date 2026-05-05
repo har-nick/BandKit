@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.dokka)
@@ -11,7 +12,7 @@ plugins {
     `maven-publish`
 }
 
-group = "uk.co.harnick.bandkit"
+group = "uk.co.harnick"
 version = "1.0.0"
 
 kotlin {
@@ -90,25 +91,23 @@ spotless {
     }
 }
 
-// For some unknown eldritch reason, I keep getting a 401 HTTP error when uploading to GitHub packages.
-// The only solution I've found was hardcoding my API keys. Any deferred reference causes it.
-// Code for reference:
-//extensions.configure<PublishingExtension> {
-//    repositories {
-//        maven {
-//            name = "GithubPackages"
-//            url = uri("")
-//
-//            credentials {
-//                username = ""
-//                password = ""
-//            }
-//        }
-//    }
-//}
-apply(from = "repositories.gradle.kts")
-
 publishing {
+    val secrets = Properties().apply {
+        load(rootProject.file("secrets.properties").reader())
+    }
+
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/har-nick/bandkit")
+
+            credentials {
+                username = secrets["gpr.user"] as? String ?: System.getenv("GITHUB_USER")
+                password = secrets["gpr.key"] as? String ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
     publications {
         withType<MavenPublication>().configureEach {
             groupId = "$group"
@@ -127,9 +126,9 @@ publishing {
                 }
 
                 scm {
-                    connection = "scm:git:git://github.com/har-nick/bandkit.git" 
-                    developerConnection = "scm:git:ssh://github.com/har-nick/bandkit.git" 
-                    url = "https://github.com/example/my-bandkit" 
+                    connection = "scm:git:git://github.com/har-nick/bandkit.git"
+                    developerConnection = "scm:git:ssh://github.com/har-nick/bandkit.git"
+                    url = "https://github.com/har-nick/bandkit"
                 }
             }
         }
