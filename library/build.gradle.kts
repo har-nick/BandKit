@@ -74,6 +74,15 @@ kotlin {
             implementation(libs.kotest.framework)
         }
     }
+
+    targets.all {
+        mavenPublication {
+            artifactId = artifactId.replaceFirst(
+                "^library".toRegex(),
+                "bandkit"
+            )
+        }
+    }
 }
 
 android {
@@ -110,9 +119,6 @@ publishing {
 
     publications {
         withType<MavenPublication>().configureEach {
-            groupId = "$group"
-            version = "$version"
-
             pom {
                 name = "BandKit"
                 description = "A Kotlin Multiplatform library to interface with Bandcamp's API."
