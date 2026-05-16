@@ -17,5 +17,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "bandkit"
-include(":library")
+include(":bandkit")
+project(":bandkit").projectDir = file("library")

@@ -13,7 +13,9 @@ plugins {
 }
 
 group = "uk.co.harnick"
-version = "1.0.0"
+version = "0.0.1"
+
+private fun getVersion(): String = version as String
 
 kotlin {
     jvmToolchain(libs.versions.jdk.get().toInt())
@@ -42,7 +44,7 @@ kotlin {
 
         compilations["main"].packageJson {
             name = "bandkit"
-            version = "1.0.0"
+            version = getVersion()
             main = "kotlin/bandkit.js"
         }
     }
@@ -56,7 +58,7 @@ kotlin {
 
         compilations["main"].packageJson {
             name = "bandkit"
-            version = "1.0.0"
+            version = getVersion()
             main = "kotlin/bandkit.js"
         }
     }
@@ -72,15 +74,6 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotest.framework)
-        }
-    }
-
-    targets.all {
-        mavenPublication {
-            artifactId = artifactId.replaceFirst(
-                "^library".toRegex(),
-                "bandkit"
-            )
         }
     }
 }
