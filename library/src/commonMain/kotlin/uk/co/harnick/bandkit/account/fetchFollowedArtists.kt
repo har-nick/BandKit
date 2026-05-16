@@ -7,7 +7,7 @@ import io.ktor.util.date.getTimeMillis
 import kotlinx.serialization.json.Json as JsonSerializer
 import uk.co.harnick.bandkit.account.dto.followed.artist.FollowedArtistError
 import uk.co.harnick.bandkit.account.dto.followed.artist.FollowedArtistsResponse
-import uk.co.harnick.bandkit.account.dto.followers.FollowersRequest
+import uk.co.harnick.bandkit.account.dto.followers.FollowersRequestBody
 import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
 import uk.co.harnick.bandkit.util.fetchApiResponse
@@ -34,7 +34,7 @@ public suspend fun BandKit.fetchFollowedArtists(
     }
 
     val requestBody = JsonSerializer.encodeToString(
-        FollowersRequest(userId, paginationToken, accountLimit)
+        FollowersRequestBody(userId, paginationToken, accountLimit)
     )
 
     return fetchApiResponse<FollowedArtistsResponse, FollowedArtistError>(

@@ -4,13 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal class FollowedUserRequest(
+internal class FollowedUserRequestBody(
     @SerialName("fan_id")
-    internal val userId: Long,
+    val userId: Long,
 
     @SerialName("count")
-    internal val itemLimit: Int,
+    val itemLimit: Int,
 
     @SerialName("older_than_token")
-    internal val olderThanToken: String
+    val olderThanToken: String
 )

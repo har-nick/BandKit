@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal class LibraryItemRequest(
     @SerialName("fan_id")
-    internal val userId: Long,
+    val userId: Long,
 
     @SerialName("older_than_token")
-    internal val olderThanToken: String,
+    val olderThanToken: String,
 
     @SerialName("count")
-    internal val itemLimit: Int
+    val itemLimit: Int
 )

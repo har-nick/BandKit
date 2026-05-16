@@ -7,7 +7,7 @@ import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
 import uk.co.harnick.bandkit.util.fetchApiResponse
 import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedError
-import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedRequest
+import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedRequestBody
 import uk.co.harnick.bandkit.discovery.dto.fanfeed.FanFeedResponse
 import uk.co.harnick.bandkit.discovery.util.urlEncode
 import kotlin.time.Clock
@@ -27,7 +27,7 @@ private suspend fun BandKit.fetchFanFeed(
     val url = "$BASE_URL/fan_dash_feed_updates"
 
     val requestBody = urlEncode(
-        FanFeedRequest(userId, timestampCursor)
+        FanFeedRequestBody(userId, timestampCursor)
     )
 
     return fetchApiResponse<FanFeedResponse, FanFeedError>(

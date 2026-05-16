@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FanFeedRequest internal constructor(
+internal class FanFeedRequestBody(
     @SerialName("fan_id")
-    public val userId: Long,
+    val userId: Long,
 
     @SerialName("older_than")
-    public val olderThan: Long
+    val olderThan: Long
 )

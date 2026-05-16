@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class Album internal constructor(
+public class AlbumData internal constructor(
     @SerialName("id")
     public val id: Long,
 
@@ -15,10 +15,10 @@ public class Album internal constructor(
     public val artId: Long,
 
     @SerialName("bandId")
-    public val bandId: Long,
+    public val artistId : Long,
 
     @SerialName("bandImageId")
-    public val bandImageId: Long,
+    public val artistImageId: Long,
 
     @SerialName("isPreorder")
     public val isPreorder: Boolean,
@@ -33,7 +33,7 @@ public class Album internal constructor(
     public val isSetPrice: Boolean,
 
     @SerialName("price")
-    public val price: Double,
+    public val price: Float,
 
     @SerialName("url")
     public val url: String,

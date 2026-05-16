@@ -8,7 +8,7 @@ import uk.co.harnick.bandkit.core.BandKit
 import uk.co.harnick.bandkit.core.BandKit.Companion.BASE_URL
 import uk.co.harnick.bandkit.core.BandKit.SearchFilter
 import uk.co.harnick.bandkit.search.dto.SearchResultsError
-import uk.co.harnick.bandkit.search.dto.SearchResultsRequest
+import uk.co.harnick.bandkit.search.dto.SearchResultsRequestBody
 import uk.co.harnick.bandkit.search.dto.SearchResultsResponse
 import uk.co.harnick.bandkit.util.fetchApiResponse
 
@@ -19,7 +19,7 @@ public suspend fun BandKit.fetchSearchResults(
     val url = "$BASE_URL/api/bcsearch_public_api/1/autocomplete_elastic"
 
     val requestBody = JsonSerializer.encodeToString(
-        SearchResultsRequest(
+        SearchResultsRequestBody(
             searchText = searchValue,
             searchFilter = filter.apiRef,
             // NOTE: Makes no change to result data, AFAIK.

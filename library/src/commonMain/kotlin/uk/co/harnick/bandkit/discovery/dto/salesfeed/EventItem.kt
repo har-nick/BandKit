@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class EventItem(
+public class EventItem internal constructor(
     @SerialName("utc_date")
     public val utcDate: Double,
 

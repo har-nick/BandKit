@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public class PlayerData internal constructor(
     @SerialName("album")
-    public val album: Album,
+    public val album: AlbumData?,
 
     @SerialName("id")
     public val id: Long,
@@ -21,10 +21,10 @@ public class PlayerData internal constructor(
     public val artistName: String,
 
     @SerialName("duration")
-    public val duration: Float,
+    public val duration: Double,
 
     @SerialName("artId")
-    public val artId: Long?,
+    public val artId: Long,
 
     @SerialName("isPurchasable")
     public val isPurchasable: Boolean,
@@ -36,7 +36,7 @@ public class PlayerData internal constructor(
     public val isSetPrice: Boolean,
 
     @SerialName("price")
-    public val price: Double,
+    public val price: Float,
 
     @SerialName("url")
     public val url: String,
